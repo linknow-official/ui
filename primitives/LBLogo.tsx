@@ -1,4 +1,5 @@
-import Logo from '../assets/logo.svg'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const Logo = require('../assets/logo.svg')
 
 export type LBLogoProps = {
     size: 'small' | 'medium' | 'large'

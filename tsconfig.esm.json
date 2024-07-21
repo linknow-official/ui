@@ -1,0 +1,17 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "es6",
+        "outDir": "esm"
+    },
+    "include": [
+        "assets/**/*",
+        "components/**/*",
+        "constants/**/*",
+        "helpers/**/*",
+        "hooks/**/*",
+        "primitives/**/*",
+        "theme/**/*",
+    ]
+}

@@ -6,12 +6,28 @@
             "unicpeak/*": [
                 "./*"
             ],
-        }
+        },
+        "jsx": "react-jsx",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "typeRoots": ["node_modules/@types", "src/types"]
+
+
     },
+    "exclude": ["node_modules", "build"],
+
     "include": [
         "**/*.ts",
         "**/*.tsx",
         ".expo/types/**/*.ts",
-        "expo-env.d.ts", "app/[link]/index.tsx"
+        "expo-env.d.ts",
+        "declarations.d.ts"
     ]
 }

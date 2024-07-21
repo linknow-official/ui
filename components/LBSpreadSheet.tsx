@@ -44,8 +44,8 @@ export function LBSpreadSheet ({ headers, data, fixedColumnEndIndex }: LBSpreadS
 	)
 
 	const tableData = data
-	const tableWidths = headers.map(header => header.width)
-	const flexes = headers.map(header => header.flex)
+	const tableWidths = headers.map(header => header.width).filter(e => e) as (number[] | undefined)
+	const flexes = headers.map(header => header.flex).filter(e => e) as (number[] | undefined)
 
 	const leftColumnWidth = headers.filter((h, index) => index <= (fixedColumnEndIndex || 0)).reduce(((p, v) => p + (v?.width || 0)), 0)
 	const leftColumnFlex = headers.filter((h, index) => index <= (fixedColumnEndIndex || 0)).reduce(((p, v) => p + (v?.flex || 0)), 0)

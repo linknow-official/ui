@@ -1,51 +1,53 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import React from 'react'
 import { SvgProps } from 'react-native-svg'
 
 import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
 import { useThemeColor } from 'unicpeak/hooks/useThemeColor'
+import { ViewStyle } from 'react-native'
 
 // TODO: unknown store
 import { LBView } from 'unicpeak/primitives/LBView'
-import { ViewStyle } from 'react-native'
-import Adjust from '../assets/icons/adjust.svg'
-import { default as AppStore, default as UnknownStore } from '../assets/icons/app-store.svg'
-import Appsflyer from '../assets/icons/appsflyer.svg'
-import Calendar from '../assets/icons/calendar.svg'
-import ChevronLeft from '../assets/icons/chevron-left.svg'
-import ChevronsDownUp from '../assets/icons/chevrons-down-up.svg'
-import ClipboardX from '../assets/icons/clipboard-x.svg'
-import Copy from '../assets/icons/copy.svg'
-import CornerUpLeftWhite from '../assets/icons/corner-up-left-white.svg'
-import CornerUpLeft from '../assets/icons/corner-up-left.svg'
-import Edit2 from '../assets/icons/edit-2.svg'
-import Edit3 from '../assets/icons/edit-3.svg'
-import Edit from '../assets/icons/edit.svg'
-import GlassWater from '../assets/icons/glass-water.svg'
-import MailCheck from '../assets/icons/mail-check.svg'
-import MailMinus from '../assets/icons/mail-minus.svg'
-import Mail from '../assets/icons/mail.svg'
-import Mails from '../assets/icons/mails.svg'
-import PersonStanding from '../assets/icons/person-standing.svg'
-import PlayStore from '../assets/icons/play-store.svg'
-import PlusCircle from '../assets/icons/plus-circle.svg'
-import PlusSquare from '../assets/icons/plus-square.svg'
-import Plus from '../assets/icons/plus.svg'
-import Puzzle from '../assets/icons/puzzle.svg'
-import QRCode from '../assets/icons/qr-code.svg'
-import Quote from '../assets/icons/quote.svg'
-import RadioReceiver from '../assets/icons/radio-receiver.svg'
-import RefreshCCW from '../assets/icons/refresh-ccw.svg'
-import RefreshCW from '../assets/icons/refresh-cw.svg'
-import Refrigator from '../assets/icons/refrigerator.svg'
-import Regex from '../assets/icons/regex.svg'
-import Send from '../assets/icons/send.svg'
-import ShieldCheck from '../assets/icons/shield-check.svg'
-import Timer from '../assets/icons/timer.svg'
-import ZapOff from '../assets/icons/zap-off.svg'
-import Zap from '../assets/icons/zap.svg'
-import Currency from '../assets/icons/currency.svg'
-import User from '../assets/icons/user.svg'
-import NavigationOff from '../assets/icons/navigation-off.svg'
+const AppStore = require('../assets/icons/app-store.svg')
+const UnknownStore = require('../assets/icons/app-store.svg')
+const Adjust = require('../assets/icons/adjust.svg')
+const Appsflyer = require('../assets/icons/appsflyer.svg')
+const Calendar = require('../assets/icons/calendar.svg')
+const ChevronLeft = require('../assets/icons/chevron-left.svg')
+const ChevronsDownUp = require('../assets/icons/chevrons-down-up.svg')
+const ClipboardX = require('../assets/icons/clipboard-x.svg')
+const Copy = require('../assets/icons/copy.svg')
+const CornerUpLeftWhite = require('../assets/icons/corner-up-left-white.svg')
+const CornerUpLeft = require('../assets/icons/corner-up-left.svg')
+const Edit2 = require('../assets/icons/edit-2.svg')
+const Edit3 = require('../assets/icons/edit-3.svg')
+const Edit = require('../assets/icons/edit.svg')
+const GlassWater = require('../assets/icons/glass-water.svg')
+const MailCheck = require('../assets/icons/mail-check.svg')
+const MailMinus = require('../assets/icons/mail-minus.svg')
+const Mail = require('../assets/icons/mail.svg')
+const Mails = require('../assets/icons/mails.svg')
+const PersonStanding = require('../assets/icons/person-standing.svg')
+const PlayStore = require('../assets/icons/play-store.svg')
+const PlusCircle = require('../assets/icons/plus-circle.svg')
+const PlusSquare = require('../assets/icons/plus-square.svg')
+const Plus = require('../assets/icons/plus.svg')
+const Puzzle = require('../assets/icons/puzzle.svg')
+const QRCode = require('../assets/icons/qr-code.svg')
+const Quote = require('../assets/icons/quote.svg')
+const RadioReceiver = require('../assets/icons/radio-receiver.svg')
+const RefreshCCW = require('../assets/icons/refresh-ccw.svg')
+const RefreshCW = require('../assets/icons/refresh-cw.svg')
+const Refrigator = require('../assets/icons/refrigerator.svg')
+const Regex = require('../assets/icons/regex.svg')
+const Send = require('../assets/icons/send.svg')
+const ShieldCheck = require('../assets/icons/shield-check.svg')
+const Timer = require('../assets/icons/timer.svg')
+const ZapOff = require('../assets/icons/zap-off.svg')
+const Zap = require('../assets/icons/zap.svg')
+const Currency = require('../assets/icons/currency.svg')
+const User = require('../assets/icons/user.svg')
+const NavigationOff = require('../assets/icons/navigation-off.svg')
 
 export type Icon =
 'navigation-off' |

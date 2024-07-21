@@ -17,6 +17,7 @@ const compat = new FlatCompat({
 
 export default [ {
 	ignores: [
+		'**/assets',
 		'**/.vscode',
 		'**/.expo',
 		'**/node_modules',

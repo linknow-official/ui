@@ -1,4 +1,6 @@
-import { ConversionType, getConversionType, getCountry, getPlatformIcon, getPricingTypeCode, Platform, Pricing } from 'unicpeak/helpers/left-byte'
+
+/* eslint-disable no-case-declarations */
+import { ConversionType, getConversionType, getCountry, getPlatformIcon, getPricingTypeCode, Platform, Pricing, PricingType } from 'unicpeak/helpers/left-byte'
 import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
 import { LBView } from 'unicpeak/primitives/LBView'
 import { LBPricingItem, LBPricingItemProps } from './LBPricingItem'
@@ -10,11 +12,14 @@ export type LBPricingProps = {
 const allPlatforms: Platform[] = [ 'app-store', 'play-store' ]
 const allConversionTypes: ConversionType[] = [ 'Install', 'Session', 'Event' ]
 
-export function LBPricing ({ pricing }: LBPricingProps) {
+export function LBPricing ({ pricing: _pricing }: LBPricingProps) {
 	const { spacing } = useLBTheme()
 
+	let pricing = { ..._pricing }
+	pricing.pricingType = getPricingTypeCode(pricing.pricingType) as PricingType
+
 	const pricingItems: LBPricingItemProps[] = (() => {
-		switch (getPricingTypeCode(pricing.pricingType)){
+		switch (pricing.pricingType){
 		case 'Fixed':
 			return [
 				{
