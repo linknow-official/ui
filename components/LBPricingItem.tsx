@@ -1,10 +1,10 @@
-import { getPlatformIcon } from 'unicpeak/helpers/left-byte'
-import { formatMoney } from 'unicpeak/helpers/money'
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
-import { LBIcon } from 'unicpeak/primitives/LBIcon'
-import { LBText } from 'unicpeak/primitives/LBText'
-import { LBView } from 'unicpeak/primitives/LBView'
-import { Icon } from 'unicpeak/theme/useIcon'
+import { getPlatformIcon } from 'unicpeak-ui/helpers/left-byte'
+import { formatMoney } from 'unicpeak-ui/helpers/money'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
+import { LBIcon } from 'unicpeak-ui/primitives/LBIcon'
+import { LBText } from 'unicpeak-ui/primitives/LBText'
+import { LBView } from 'unicpeak-ui/primitives/LBView'
+import { Icon } from 'unicpeak-ui/theme/useIcon'
 import React from 'react'
 
 export type LBPricingItemProps = {

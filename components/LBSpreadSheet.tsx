@@ -1,6 +1,6 @@
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
-import { LBText } from 'unicpeak/primitives/LBText'
-import { LBView } from 'unicpeak/primitives/LBView'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
+import { LBText } from 'unicpeak-ui/primitives/LBText'
+import { LBView } from 'unicpeak-ui/primitives/LBView'
 import React, { useRef } from 'react'
 import { ScrollView, View } from 'react-native'
 import {

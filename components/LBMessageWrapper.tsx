@@ -1,9 +1,9 @@
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
-import { useThemeColor } from 'unicpeak/hooks/useThemeColor'
-import { LBIcon, LBIconProps } from 'unicpeak/primitives/LBIcon'
-import { LBText } from 'unicpeak/primitives/LBText'
-import { LBView, LBViewProps } from 'unicpeak/primitives/LBView'
-import { Icon } from 'unicpeak/theme/useIcon'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
+import { useThemeColor } from 'unicpeak-ui/hooks/useThemeColor'
+import { LBIcon, LBIconProps } from 'unicpeak-ui/primitives/LBIcon'
+import { LBText } from 'unicpeak-ui/primitives/LBText'
+import { LBView, LBViewProps } from 'unicpeak-ui/primitives/LBView'
+import { Icon } from 'unicpeak-ui/theme/useIcon'
 
 export type LBMessageWrapperProps = {
     containerStyle?: Partial<LBViewProps['style']>

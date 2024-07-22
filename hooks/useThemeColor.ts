@@ -1,4 +1,4 @@
-import Colors from 'unicpeak/constants/Colors'
+import Colors from 'unicpeak-ui/constants/Colors'
 
 type ColorOptions = 50|100|200|300|400|500|600|700|800|900
 type CategoryColor = `${keyof (typeof Colors.light & typeof Colors.dark)}.${ColorOptions}`

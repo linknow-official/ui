@@ -1,8 +1,8 @@
 
 /* eslint-disable no-case-declarations */
-import { ConversionType, getConversionType, getCountry, getPlatformIcon, getPricingTypeCode, Platform, Pricing, PricingType } from 'unicpeak/helpers/left-byte'
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
-import { LBView } from 'unicpeak/primitives/LBView'
+import { ConversionType, getConversionType, getCountry, getPlatformIcon, getPricingTypeCode, Platform, Pricing, PricingType } from 'unicpeak-ui/helpers/left-byte'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
+import { LBView } from 'unicpeak-ui/primitives/LBView'
 import { LBPricingItem, LBPricingItemProps } from './LBPricingItem'
 
 export type LBPricingProps = {

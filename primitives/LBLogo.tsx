@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const Logo = require('../assets/logo.svg')
+import Logo from 'unicpeak-ui/assets/logo.svg'
 
 export type LBLogoProps = {
     size: 'small' | 'medium' | 'large'

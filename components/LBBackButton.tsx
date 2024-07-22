@@ -1,5 +1,5 @@
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
-import { LBButton } from 'unicpeak/primitives/LBButton'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
+import { LBButton } from 'unicpeak-ui/primitives/LBButton'
 import { router } from 'expo-router'
 
 type LBBackButtonProps = {

@@ -1,5 +1,5 @@
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
-import { useThemeColor } from 'unicpeak/hooks/useThemeColor'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
+import { useThemeColor } from 'unicpeak-ui/hooks/useThemeColor'
 
 export type TypographyVariant =
 'h1' |

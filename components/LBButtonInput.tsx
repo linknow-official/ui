@@ -1,8 +1,8 @@
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
-import { LBButton, LBButtonProps } from 'unicpeak/primitives/LBButton'
-import { LBInput, LBInputProps } from 'unicpeak/primitives/LBInput'
-import { LBText, LBTextProps } from 'unicpeak/primitives/LBText'
-import { LBView } from 'unicpeak/primitives/LBView'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
+import { LBButton, LBButtonProps } from 'unicpeak-ui/primitives/LBButton'
+import { LBInput, LBInputProps } from 'unicpeak-ui/primitives/LBInput'
+import { LBText, LBTextProps } from 'unicpeak-ui/primitives/LBText'
+import { LBView } from 'unicpeak-ui/primitives/LBView'
 
 type LBButtonInputProps = {
     label: string;

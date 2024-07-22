@@ -1,5 +1,5 @@
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
-import { useThemeColor } from 'unicpeak/hooks/useThemeColor'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
+import { useThemeColor } from 'unicpeak-ui/hooks/useThemeColor'
 import React from 'react'
 import { LBButton } from './LBButton'
 import { LBText } from './LBText'

@@ -1,5 +1,5 @@
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
-import { LBView } from 'unicpeak/primitives/LBView'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
+import { LBView } from 'unicpeak-ui/primitives/LBView'
 import { LinearGradient } from 'expo-linear-gradient'
 import React from 'react'
 import { Image, TouchableHighlight } from 'react-native'

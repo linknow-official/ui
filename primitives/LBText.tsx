@@ -1,9 +1,9 @@
 import { Text as DefaultText, Platform, TextStyle } from 'react-native'
 
-import { useThemeColor } from 'unicpeak/hooks/useThemeColor'
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
+import { useThemeColor } from 'unicpeak-ui/hooks/useThemeColor'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
 import { ThemeProps } from './ThemeProps'
-import { TypographyTheme, TypographyVariant, TypographyWeight, useTypography } from 'unicpeak/theme/useTypography'
+import { TypographyTheme, TypographyVariant, TypographyWeight, useTypography } from 'unicpeak-ui/theme/useTypography'
 
 export type LBTextProps = ThemeProps & DefaultText['props'] & {
   color?: ReturnType<typeof useThemeColor>,

@@ -2,32 +2,29 @@
     "extends": "expo/tsconfig.base",
     "compilerOptions": {
         "strict": true,
-        "paths": {
-            "unicpeak/*": [
-                "./*"
-            ],
-        },
-        "jsx": "react-jsx",
-        "module": "ESNext",
-        "moduleResolution": "Node",
-        "allowJs": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "forceConsistentCasingInFileNames": true,
-        "resolveJsonModule": true,
         "isolatedModules": true,
+        "paths": {
+            "unicpeak-ui/*": [
+                "./*"
+            ]
+        },
         "typeRoots": ["node_modules/@types", "src/types"]
-
-
     },
-    "exclude": ["node_modules", "build"],
-
     "include": [
+        "assets/**/*",
+        "components/**/*",
+        "constants/**/*",
+        "helpers/**/*",
+        "hooks/**/*",
+        "primitives/**/*",
+        "theme/**/*",
         "**/*.ts",
         "**/*.tsx",
         ".expo/types/**/*.ts",
         "expo-env.d.ts",
         "declarations.d.ts"
-    ]
+    ],
+    "exclude": ["node_modules", "build"]
 }

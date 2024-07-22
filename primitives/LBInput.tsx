@@ -1,9 +1,9 @@
 import React from 'react'
 import { TextInput, TextInputProps } from 'react-native'
 
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
-import { useThemeColor } from 'unicpeak/hooks/useThemeColor'
-import { useTypography } from 'unicpeak/theme/useTypography'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
+import { useThemeColor } from 'unicpeak-ui/hooks/useThemeColor'
+import { useTypography } from 'unicpeak-ui/theme/useTypography'
 import { FieldError } from 'react-hook-form'
 import { LBText } from './LBText'
 import { LBView, LBViewProps } from './LBView'

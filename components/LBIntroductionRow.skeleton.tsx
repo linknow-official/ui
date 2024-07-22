@@ -1,8 +1,8 @@
 
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
 import { MotiView } from 'moti'
 import React from 'react'
-import { LBView } from 'unicpeak/primitives/LBView'
+import { LBView } from 'unicpeak-ui/primitives/LBView'
 import { Skeleton } from 'moti/skeleton'
 
 export const LBIntroductionRowSkeleton = () => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
 
 export type DividerProps = {
   orientation?: 'vertical' | 'horizontal';

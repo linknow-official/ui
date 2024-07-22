@@ -1,8 +1,8 @@
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
-import { LBButton, LBButtonProps } from 'unicpeak/primitives/LBButton'
-import { LBIcon } from 'unicpeak/primitives/LBIcon'
-import { LBText } from 'unicpeak/primitives/LBText'
-import { LBView } from 'unicpeak/primitives/LBView'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
+import { LBButton, LBButtonProps } from 'unicpeak-ui/primitives/LBButton'
+import { LBIcon } from 'unicpeak-ui/primitives/LBIcon'
+import { LBText } from 'unicpeak-ui/primitives/LBText'
+import { LBView } from 'unicpeak-ui/primitives/LBView'
 import { Image } from 'react-native'
 
 export type LBIntroductionRowProps = {

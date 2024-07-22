@@ -1,7 +1,7 @@
 
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
 import React from 'react'
-import { LBView } from 'unicpeak/primitives/LBView'
+import { LBView } from 'unicpeak-ui/primitives/LBView'
 import { LBIntroductionRowSkeleton } from './LBIntroductionRow.skeleton'
 
 export const LBIntroductionBoxSkeleton = () => {

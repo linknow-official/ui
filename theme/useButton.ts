@@ -1,7 +1,7 @@
-import { defaultTheme } from 'unicpeak/constants/Colors'
-import { LBTheme, useLBTheme } from 'unicpeak/hooks/useLBTheme'
-import { LBIconProps } from 'unicpeak/primitives/LBIcon'
-import { LBTextProps } from 'unicpeak/primitives/LBText'
+import { defaultTheme } from 'unicpeak-ui/constants/Colors'
+import { LBTheme, useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
+import { LBIconProps } from 'unicpeak-ui/primitives/LBIcon'
+import { LBTextProps } from 'unicpeak-ui/primitives/LBText'
 
 export type ButtonVariant =
 'primary' |

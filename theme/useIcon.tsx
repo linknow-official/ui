@@ -1,53 +1,53 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+
 import React from 'react'
 import { SvgProps } from 'react-native-svg'
 
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
-import { useThemeColor } from 'unicpeak/hooks/useThemeColor'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
+import { useThemeColor } from 'unicpeak-ui/hooks/useThemeColor'
 import { ViewStyle } from 'react-native'
 
 // TODO: unknown store
-import { LBView } from 'unicpeak/primitives/LBView'
-const AppStore = require('../assets/icons/app-store.svg')
-const UnknownStore = require('../assets/icons/app-store.svg')
-const Adjust = require('../assets/icons/adjust.svg')
-const Appsflyer = require('../assets/icons/appsflyer.svg')
-const Calendar = require('../assets/icons/calendar.svg')
-const ChevronLeft = require('../assets/icons/chevron-left.svg')
-const ChevronsDownUp = require('../assets/icons/chevrons-down-up.svg')
-const ClipboardX = require('../assets/icons/clipboard-x.svg')
-const Copy = require('../assets/icons/copy.svg')
-const CornerUpLeftWhite = require('../assets/icons/corner-up-left-white.svg')
-const CornerUpLeft = require('../assets/icons/corner-up-left.svg')
-const Edit2 = require('../assets/icons/edit-2.svg')
-const Edit3 = require('../assets/icons/edit-3.svg')
-const Edit = require('../assets/icons/edit.svg')
-const GlassWater = require('../assets/icons/glass-water.svg')
-const MailCheck = require('../assets/icons/mail-check.svg')
-const MailMinus = require('../assets/icons/mail-minus.svg')
-const Mail = require('../assets/icons/mail.svg')
-const Mails = require('../assets/icons/mails.svg')
-const PersonStanding = require('../assets/icons/person-standing.svg')
-const PlayStore = require('../assets/icons/play-store.svg')
-const PlusCircle = require('../assets/icons/plus-circle.svg')
-const PlusSquare = require('../assets/icons/plus-square.svg')
-const Plus = require('../assets/icons/plus.svg')
-const Puzzle = require('../assets/icons/puzzle.svg')
-const QRCode = require('../assets/icons/qr-code.svg')
-const Quote = require('../assets/icons/quote.svg')
-const RadioReceiver = require('../assets/icons/radio-receiver.svg')
-const RefreshCCW = require('../assets/icons/refresh-ccw.svg')
-const RefreshCW = require('../assets/icons/refresh-cw.svg')
-const Refrigator = require('../assets/icons/refrigerator.svg')
-const Regex = require('../assets/icons/regex.svg')
-const Send = require('../assets/icons/send.svg')
-const ShieldCheck = require('../assets/icons/shield-check.svg')
-const Timer = require('../assets/icons/timer.svg')
-const ZapOff = require('../assets/icons/zap-off.svg')
-const Zap = require('../assets/icons/zap.svg')
-const Currency = require('../assets/icons/currency.svg')
-const User = require('../assets/icons/user.svg')
-const NavigationOff = require('../assets/icons/navigation-off.svg')
+import { LBView } from 'unicpeak-ui/primitives/LBView'
+import AppStore from 'unicpeak-ui/assets/icons/app-store.svg'
+import UnknownStore from 'unicpeak-ui/assets/icons/app-store.svg'
+import Adjust from 'unicpeak-ui/assets/icons/adjust.svg'
+import Appsflyer from 'unicpeak-ui/assets/icons/appsflyer.svg'
+import Calendar from 'unicpeak-ui/assets/icons/calendar.svg'
+import ChevronLeft from 'unicpeak-ui/assets/icons/chevron-left.svg'
+import ChevronsDownUp from 'unicpeak-ui/assets/icons/chevrons-down-up.svg'
+import ClipboardX from 'unicpeak-ui/assets/icons/clipboard-x.svg'
+import Copy from 'unicpeak-ui/assets/icons/copy.svg'
+import CornerUpLeftWhite from 'unicpeak-ui/assets/icons/corner-up-left-white.svg'
+import CornerUpLeft from 'unicpeak-ui/assets/icons/corner-up-left.svg'
+import Edit2 from 'unicpeak-ui/assets/icons/edit-2.svg'
+import Edit3 from 'unicpeak-ui/assets/icons/edit-3.svg'
+import Edit from 'unicpeak-ui/assets/icons/edit.svg'
+import GlassWater from 'unicpeak-ui/assets/icons/glass-water.svg'
+import MailCheck from 'unicpeak-ui/assets/icons/mail-check.svg'
+import MailMinus from 'unicpeak-ui/assets/icons/mail-minus.svg'
+import Mail from 'unicpeak-ui/assets/icons/mail.svg'
+import Mails from 'unicpeak-ui/assets/icons/mails.svg'
+import PersonStanding from 'unicpeak-ui/assets/icons/person-standing.svg'
+import PlayStore from 'unicpeak-ui/assets/icons/play-store.svg'
+import PlusCircle from 'unicpeak-ui/assets/icons/plus-circle.svg'
+import PlusSquare from 'unicpeak-ui/assets/icons/plus-square.svg'
+import Plus from 'unicpeak-ui/assets/icons/plus.svg'
+import Puzzle from 'unicpeak-ui/assets/icons/puzzle.svg'
+import QRCode from 'unicpeak-ui/assets/icons/qr-code.svg'
+import Quote from 'unicpeak-ui/assets/icons/quote.svg'
+import RadioReceiver from 'unicpeak-ui/assets/icons/radio-receiver.svg'
+import RefreshCCW from 'unicpeak-ui/assets/icons/refresh-ccw.svg'
+import RefreshCW from 'unicpeak-ui/assets/icons/refresh-cw.svg'
+import Refrigator from 'unicpeak-ui/assets/icons/refrigerator.svg'
+import Regex from 'unicpeak-ui/assets/icons/regex.svg'
+import Send from 'unicpeak-ui/assets/icons/send.svg'
+import ShieldCheck from 'unicpeak-ui/assets/icons/shield-check.svg'
+import Timer from 'unicpeak-ui/assets/icons/timer.svg'
+import ZapOff from 'unicpeak-ui/assets/icons/zap-off.svg'
+import Zap from 'unicpeak-ui/assets/icons/zap.svg'
+import Currency from 'unicpeak-ui/assets/icons/currency.svg'
+import User from 'unicpeak-ui/assets/icons/user.svg'
+import NavigationOff from 'unicpeak-ui/assets/icons/navigation-off.svg'
 
 export type Icon =
 'navigation-off' |

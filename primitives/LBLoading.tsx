@@ -1,4 +1,4 @@
-import { useThemeColor } from 'unicpeak/hooks/useThemeColor'
+import { useThemeColor } from 'unicpeak-ui/hooks/useThemeColor'
 import React from 'react'
 import { ActivityIndicator } from 'react-native'
 import { LBView } from './LBView'

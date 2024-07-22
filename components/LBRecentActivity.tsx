@@ -1,11 +1,11 @@
 import React from 'react'
-import { LBView } from 'unicpeak/primitives/LBView'
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
-import { Icon } from 'unicpeak/theme/useIcon'
-import { formatMoney } from 'unicpeak/helpers/money'
-import { LBIcon } from 'unicpeak/primitives/LBIcon'
-import { LBText } from 'unicpeak/primitives/LBText'
-import { formatDateTime } from 'unicpeak/helpers/time'
+import { LBView } from 'unicpeak-ui/primitives/LBView'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
+import { Icon } from 'unicpeak-ui/theme/useIcon'
+import { formatMoney } from 'unicpeak-ui/helpers/money'
+import { LBIcon } from 'unicpeak-ui/primitives/LBIcon'
+import { LBText } from 'unicpeak-ui/primitives/LBText'
+import { formatDateTime } from 'unicpeak-ui/helpers/time'
 import { Image } from 'react-native'
 
 export type LBRecentActivityProps = {
@@ -24,7 +24,7 @@ export type LBRecentActivityProps = {
 	conversionType: 'Conversion' | 'Install' | 'Event' | 'Reattribution' | 'Rejected' | 'Session'
 
 }
-export function LBRecentActivity ({ publisher, createdAt, platform, country, estimatedPayout, currency, conversionType }: LBRecentActivityProps) {
+export function LBRecentActivity ({ publisher, createdAt, platform, country, estimatedPayout, currency }: LBRecentActivityProps) {
 	const { color, spacing } = useLBTheme()
 
 	return <LBView direction='horizontal' style={{
@@ -43,7 +43,7 @@ export function LBRecentActivity ({ publisher, createdAt, platform, country, est
 						alignItems: 'center'
 					}}>
 						<LBView direction='horizontal' center>
-							<Image source={publisher.photo ? { uri: publisher.photo } : require('unicpeak/assets/images/default-avatar.jpeg')} style={{
+							<Image source={publisher.photo ? { uri: publisher.photo } : require('unicpeak-ui/assets/images/default-avatar.jpeg')} style={{
 								width: 40,
 								height: 40,
 								overflow: 'hidden',
@@ -70,19 +70,19 @@ export function LBRecentActivity ({ publisher, createdAt, platform, country, est
 							<LBText style={{ flex: 1 }} variant='detail'>
 								{country}
 							</LBText>
-			
+
 						</LBText>
-		
+
 						{platform && (
 							<LBView style={{ flexDirection: 'row', alignItems: 'center' }}>
 								<LBText variant='small' color={color('slate.900')}>
 					Platform:
 								</LBText>
-				
+
 								<LBView style={{ marginLeft: spacing(1) }}>
 									<LBIcon icon={platform} />
 								</LBView>
-				
+
 							</LBView>
 						)}
 					</LBView>
@@ -113,7 +113,7 @@ export function LBRecentActivity ({ publisher, createdAt, platform, country, est
 				<LBView direction='vertical'>
 					<LBText variant='small' color={color('slate.400')}>install</LBText>
 				</LBView>
-				
+
 			</LBView>
 		</LBView>
 	</LBView>

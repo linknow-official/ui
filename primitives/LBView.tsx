@@ -1,4 +1,4 @@
-import { useThemeColor } from 'unicpeak/hooks/useThemeColor'
+import { useThemeColor } from 'unicpeak-ui/hooks/useThemeColor'
 import React, { ReactElement } from 'react'
 import { View as DefaultView, FlatList, StyleProp, ViewStyle } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'

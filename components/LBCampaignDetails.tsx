@@ -1,8 +1,8 @@
-import { Campaign } from 'unicpeak/helpers/left-byte'
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
-import { LBIcon } from 'unicpeak/primitives/LBIcon'
-import { LBText } from 'unicpeak/primitives/LBText'
-import { LBView } from 'unicpeak/primitives/LBView'
+import { Campaign } from 'unicpeak-ui/helpers/left-byte'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
+import { LBIcon } from 'unicpeak-ui/primitives/LBIcon'
+import { LBText } from 'unicpeak-ui/primitives/LBText'
+import { LBView } from 'unicpeak-ui/primitives/LBView'
 import React from 'react'
 import { Image } from 'react-native'
 

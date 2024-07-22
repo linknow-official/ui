@@ -1,4 +1,4 @@
-import { Icon, useIcon, IconProps } from 'unicpeak/theme/useIcon'
+import { Icon, useIcon, IconProps } from 'unicpeak-ui/theme/useIcon'
 
 export type LBIconProps = Partial<IconProps> & {
     icon: Icon;

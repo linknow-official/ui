@@ -1,4 +1,4 @@
-import { Icon } from 'unicpeak/theme/useIcon'
+import { Icon } from 'unicpeak-ui/theme/useIcon'
 
 export type CampaignStatus = 'Active' | 'Paused' | 'Finished' | 'Requested';
 export type TrackerPlatform = 'Adjust' | 'Appsflyer';

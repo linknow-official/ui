@@ -1,7 +1,7 @@
-import { useLBTheme } from 'unicpeak/hooks/useLBTheme'
-import { LBButton, LBButtonProps } from 'unicpeak/primitives/LBButton'
-import { LBText } from 'unicpeak/primitives/LBText'
-import { LBView } from 'unicpeak/primitives/LBView'
+import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
+import { LBButton, LBButtonProps } from 'unicpeak-ui/primitives/LBButton'
+import { LBText } from 'unicpeak-ui/primitives/LBText'
+import { LBView } from 'unicpeak-ui/primitives/LBView'
 
 type LBIntroductionListProps = {
     title: string;
