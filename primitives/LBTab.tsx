@@ -10,7 +10,7 @@ export type LBTabProps = ThemeProps & {
 	tabs: string[];
 	activeTab?: string;
 	onTabPress: (tab: string) => void;
-	type?: 'default' | 'text'
+	type?: 'default' | 'text';
 };
 
 export function LBTab (props: LBTabProps) {

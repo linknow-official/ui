@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextInput, TextInputProps } from 'react-native'
+import { TextInput, TextInputProps, TextStyle } from 'react-native'
 
 import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
 import { useThemeColor } from 'unicpeak-ui/hooks/useThemeColor'
@@ -8,14 +8,16 @@ import { FieldError } from 'react-hook-form'
 import { LBText } from './LBText'
 import { LBView, LBViewProps } from './LBView'
 import { ThemeProps } from './ThemeProps'
+import { ExtendedStyleProp } from 'unicpeak-ui/hooks/useMediaQuery'
 
 export type LBInputProps = ThemeProps & TextInputProps & {
-  rightComponent?: React.ReactNode;
-  rightComponentContainerStyle?: Partial<LBViewProps>;
-  containerStyle?: Partial<LBViewProps>;
-  label?: string
-  bottomPlaceHolder?: boolean;
-  error?: FieldError
+    rightComponent?: React.ReactNode;
+    rightComponentContainerStyle?: Partial<LBViewProps>;
+    containerStyle?: Partial<LBViewProps>;
+    label?: string
+    bottomPlaceHolder?: boolean;
+    error?: FieldError
+    style?: ExtendedStyleProp<TextStyle>
 };
 
 export function LBInput (props: LBInputProps) {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleProp, View, ViewStyle } from 'react-native'
+import { View, ViewStyle } from 'react-native'
 import RNPickerSelect, { PickerSelectProps, PickerStyle } from 'react-native-picker-select'
 
 import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
@@ -8,12 +8,13 @@ import { useTypography } from 'unicpeak-ui/theme/useTypography'
 import { LBText } from './LBText'
 import { LBView } from './LBView'
 import { ThemeProps } from './ThemeProps'
-import { useMediaQuery } from 'unicpeak-ui/hooks/useMediaQuery'
+import { ExtendedStyleProp, useMediaQuery } from 'unicpeak-ui/hooks/useMediaQuery'
 
 export type LBSelectProps = ThemeProps & PickerSelectProps & {
-  containerStyle?: StyleProp<ViewStyle>;
-  label?: string;
-  bottomPlaceHolder?: boolean;
+    containerStyle?: ExtendedStyleProp<ViewStyle>;
+    label?: string;
+    bottomPlaceHolder?: boolean;
+    style?: ExtendedStyleProp<View>;
 };
 
 export function LBSelect (props: LBSelectProps) {

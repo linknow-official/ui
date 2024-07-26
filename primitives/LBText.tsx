@@ -4,16 +4,17 @@ import { useThemeColor } from 'unicpeak-ui/hooks/useThemeColor'
 import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
 import { ThemeProps } from './ThemeProps'
 import { TypographyTheme, TypographyVariant, TypographyWeight, useTypography } from 'unicpeak-ui/theme/useTypography'
-import { useMediaQuery } from 'unicpeak-ui/hooks/useMediaQuery'
+import { ExtendedStyleProp, useMediaQuery } from 'unicpeak-ui/hooks/useMediaQuery'
 
 export type LBTextProps = ThemeProps & DefaultText['props'] & {
-  color?: ReturnType<typeof useThemeColor>,
-  underlineColor?: ReturnType<typeof useThemeColor>,
-  underlineWidth?: number,
-  center?: boolean,
-  variant?: TypographyVariant,
-  override?: Partial<TypographyTheme>,
-  fontWeight?: TypographyWeight
+    color?: ReturnType<typeof useThemeColor>,
+    underlineColor?: ReturnType<typeof useThemeColor>,
+    underlineWidth?: number,
+    center?: boolean,
+    variant?: TypographyVariant,
+    override?: Partial<TypographyTheme>,
+    fontWeight?: TypographyWeight;
+    style?: ExtendedStyleProp<TextStyle>;
 };
 
 export function LBText (props: LBTextProps) {

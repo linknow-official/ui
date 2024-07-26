@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react'
 import { View as DefaultView, FlatList, StyleProp, ViewStyle } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { ThemeProps } from './ThemeProps'
-import { useMediaQuery } from 'unicpeak-ui/hooks/useMediaQuery'
+import { ExtendedStyleProp, useMediaQuery } from 'unicpeak-ui/hooks/useMediaQuery'
 
 const generateUniqueId = (() => {
 	let counter = 0
@@ -16,7 +16,8 @@ type BaseLBViewProps = ThemeProps & {
     grid?: boolean,
     center?: boolean,
     renderItemStyle?: Partial<LBViewProps>;
-    renderItemKey?: (index: number) => string
+    renderItemKey?: (index: number) => string;
+    style?: ExtendedStyleProp<ViewStyle>;
 };
 
 export type LBFlatViewProps = BaseLBViewProps & {
@@ -40,8 +41,8 @@ export type LBViewProps = LBFlatViewProps | LBScrollViewProps
 export function LBView (props: LBViewProps) {
 	const { style: _style, scrollView, grid, renderItemStyle: _renderItemViewProps, renderItemKey, flatList, children, direction = 'vertical', center, ...otherProps } = props
 	const backgroundColor = useThemeColor('background')
-	const { style } = useMediaQuery(_style)
-	const renderItemStyle = useMediaQuery(_renderItemViewProps?.style)
+	const { style } = useMediaQuery(_style) as { style: ExtendedStyleProp<ViewStyle> }
+	const renderItemStyle = useMediaQuery(_renderItemViewProps?.style) as { style: ExtendedStyleProp<ViewStyle> }
 
 	if (grid){
 		return (
@@ -138,14 +139,16 @@ export function LBView (props: LBViewProps) {
 		)
 	}
 
+	const defaultViewStyle = useMediaQuery([
+		{ flexDirection: direction === 'horizontal' ? 'row' : 'column' },
+		center && { alignItems: 'center', justifyContent: 'center' },
+		style
+	])
+
 	return (
 		<DefaultView
 			{...otherProps}
-			style={[
-				{ flexDirection: direction === 'horizontal' ? 'row' : 'column' },
-				center && { alignItems: 'center', justifyContent: 'center' },
-				style
-			]}
+			{...defaultViewStyle}
 		>
 			{(children as React.ReactNode[])?.length > 0 ? (children as React.ReactNode[]).map((item, index) => {
 				if (renderItemStyle && item){

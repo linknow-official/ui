@@ -48,8 +48,20 @@ import Zap from 'unicpeak-ui/assets/icons/zap.svg'
 import Currency from 'unicpeak-ui/assets/icons/currency.svg'
 import User from 'unicpeak-ui/assets/icons/user.svg'
 import NavigationOff from 'unicpeak-ui/assets/icons/navigation-off.svg'
+import Apple from 'unicpeak-ui/assets/icons/apple.svg'
+import Facebook from 'unicpeak-ui/assets/icons/facebook.svg'
+import Instagram from 'unicpeak-ui/assets/icons/instagram.svg'
+import Linkedin from 'unicpeak-ui/assets/icons/linkedin.svg'
+import Reddit from 'unicpeak-ui/assets/icons/reddit.svg'
+import Tiktok from 'unicpeak-ui/assets/icons/tiktok.svg'
 
 export type Icon =
+'apple' |
+'facebook' |
+'instagram' |
+'linkedin' |
+'reddit' |
+'tiktok' |
 'navigation-off' |
 'user' |
 'currency' |
@@ -101,6 +113,12 @@ export type IconProps = React.FC<SvgProps> & {
 }
 
 const iconPaths: Record<Icon, IconProps> = {
+	'apple': Apple,
+	'facebook': Facebook,
+	'instagram': Instagram,
+	'linkedin': Linkedin,
+	'reddit': Reddit,
+	'tiktok': Tiktok,
 	'navigation-off': NavigationOff,
 	'user': User,
 	'currency': Currency,
@@ -145,7 +163,9 @@ const iconPaths: Record<Icon, IconProps> = {
 
 const sizeProperties = {
 	'small': 16,
+	'semi-medium': 24,
 	'medium': 32,
+	'semi-large': 48,
 	'large': 64
 }
 

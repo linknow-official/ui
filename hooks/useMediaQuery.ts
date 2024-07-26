@@ -1,40 +1,84 @@
 import { useState, useEffect } from 'react'
 import { Dimensions, StyleProp } from 'react-native'
-import { Breakpoints, breakpoints, getDeviceBreakpoint } from 'unicpeak-ui/constants/Breakpoints'
+import { Breakpoints, breakpoints } from 'unicpeak-ui/constants/Breakpoints'
 
-
-const replaceBreakpoints = <T>(style: StyleProp<T> | StyleProp<T>[], breakpoint: keyof Breakpoints): StyleProp<T> => {
-	if (Array.isArray(style)){
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		return style.map(item => replaceBreakpoints(item as StyleProp<T>, breakpoint)).reduce((pv: any, cv: any) => ({ ...pv, ...cv }), {} as StyleProp<T>)
-	}else if (typeof style === 'object' && style !== null){
-		const newStyle: unknown = {}
-		for (const key in style){
-			if (key === breakpoint){
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				Object.assign(newStyle as any, replaceBreakpoints(style[key], breakpoint))
-			}else {
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				(newStyle as any)[key] = replaceBreakpoints(style[key], breakpoint)
-			}
-		}
-		return newStyle as StyleProp<T>
-	}
-	return style as StyleProp<T>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const mergeStyles = <T>(baseStyle?: any | undefined | null, breakpointStyle?: any | undefined | null): StyleProp<T> => {
+	return { ...baseStyle, ...breakpointStyle } as StyleProp<T>
 }
 
-export function useMediaQuery<T> (_style: StyleProp<T>[] | StyleProp<T>) {
+export type ExtendedStyleProp<T> = StyleProp<T> & {
+  [key in keyof Breakpoints]?: StyleProp<T>;
+};
+
+const findClosestBreakpoint = (width: number, breakpoints: Breakpoints) => {
+	let closestBreakpoint: keyof Breakpoints |'default' = 'default'
+	let smallestDifference = Infinity
+
+	for (const key in breakpoints){
+		const breakpointWidth = breakpoints[key as keyof Breakpoints]
+		const difference = width - breakpointWidth
+		if (difference >= 0 && difference < smallestDifference){
+			smallestDifference = difference
+			closestBreakpoint = key as keyof Breakpoints
+		}
+	}
+
+	return closestBreakpoint
+}
+
+const findMaxBreakpoint = <T>(style: ExtendedStyleProp<T>, breakpoints: Breakpoints, closestBreakpoint: keyof Breakpoints): string | null => {
+	let maxBreakpoint: string | null = null
+	let maxBreakpointValue = -1
+
+	for (const key in style){
+		if (breakpoints[key as keyof Breakpoints] !== undefined && breakpoints[key as keyof Breakpoints] <= breakpoints[closestBreakpoint]){
+			if (breakpoints[key as keyof Breakpoints] > maxBreakpointValue){
+				maxBreakpointValue = breakpoints[key as keyof Breakpoints]
+				maxBreakpoint = key
+			}
+		}
+	}
+
+	return maxBreakpoint
+}
+
+const replaceBreakpoints = <T>(style: ExtendedStyleProp<T>, breakpoints: Breakpoints, width: number): StyleProp<T> => {
+	const closestBreakpoint = findClosestBreakpoint(width, breakpoints)
+
+	if (Array.isArray(style)){
+		return style
+			.map((item) => replaceBreakpoints(item as ExtendedStyleProp<T>, breakpoints, width))
+			.reduce((pv, cv) => mergeStyles(pv, cv), {} as ExtendedStyleProp<T>) as StyleProp<T>
+	}else if (typeof style === 'object' && style !== null){
+		const baseStyle: Record<string, unknown> = {}
+		const breakpointStyle: Record<string, unknown> = {}
+
+		for (const key in style){
+			if (breakpoints[key as keyof Breakpoints] === undefined){
+				baseStyle[key] = style[key as keyof Breakpoints]
+			}
+		}
+
+		const maxBreakpoint = findMaxBreakpoint(style, breakpoints, closestBreakpoint as keyof Breakpoints)
+		if (maxBreakpoint){
+			Object.assign(breakpointStyle, replaceBreakpoints(style[maxBreakpoint as keyof Breakpoints] as ExtendedStyleProp<T>, breakpoints, width))
+		}
+
+		return mergeStyles(baseStyle, breakpointStyle) as StyleProp<T>
+	}
+	return style
+}
+
+export function useMediaQuery<T> (style?: ExtendedStyleProp<T> | ExtendedStyleProp<T>[] |null) {
 	const [ width, setWidth ] = useState(Dimensions.get('window').width)
-	const [ currentBreakpoint, setCurrentBreakpoint ] = useState(getDeviceBreakpoint(width, breakpoints))
-	const [ replacedStyle, setReplacedStyle ] = useState(replaceBreakpoints(_style, currentBreakpoint))
+	const [ replacedStyle, setReplacedStyle ] = useState(replaceBreakpoints(style || {} as ExtendedStyleProp<T>, breakpoints, width))
 
 	useEffect(() => {
 		const handleResize = () => {
 			const newWidth = Dimensions.get('window').width
 			setWidth(newWidth)
-			const newBreakpoint = getDeviceBreakpoint(newWidth, breakpoints)
-			setCurrentBreakpoint(newBreakpoint)
-			setReplacedStyle(replaceBreakpoints(_style, newBreakpoint))
+			setReplacedStyle(replaceBreakpoints(style || {} as ExtendedStyleProp<T>, breakpoints, newWidth))
 		}
 
 		if (typeof window !== 'undefined'){
@@ -46,7 +90,7 @@ export function useMediaQuery<T> (_style: StyleProp<T>[] | StyleProp<T>) {
 				window.removeEventListener('resize', handleResize)
 			}
 		}
-	}, [ _style, width ])
+	}, [ style ])
 
-	return { style: replacedStyle }
+	return { style: replacedStyle as StyleProp<T> }
 }

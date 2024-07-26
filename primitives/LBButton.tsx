@@ -8,12 +8,13 @@ import { LBLoading } from './LBLoading'
 import { LBText } from './LBText'
 import { LBView } from './LBView'
 import { ThemeProps } from './ThemeProps'
-import { useMediaQuery } from 'unicpeak-ui/hooks/useMediaQuery'
+import { ExtendedStyleProp, useMediaQuery } from 'unicpeak-ui/hooks/useMediaQuery'
 
 export type BaseLBButtonProps = ThemeProps & TouchableOpacity['props'] & {
     variant?: ButtonVariant,
     loading?: boolean,
     override?: Partial<ButtonTheme>
+    style?: ExtendedStyleProp<ViewStyle>;
 }
 export type LBIconButtonProps = BaseLBButtonProps & {
     variant: 'just-icon' | 'just-icon-circle';
@@ -51,18 +52,18 @@ export function LBButton (props: LBIconButtonProps | LBButtonProps) {
 			borderRadius: spacing(buttonTheme.disabledBorderRadius),
 			borderWidth: buttonTheme.disabledBorderWidth
 		},
-		(buttonTheme.minHeight) && {
+		...(buttonTheme.minHeight ? [ {
 			minHeight: buttonTheme.minHeight
-		},
-		(buttonTheme.minWidth) && {
+		} ] : []),
+		...(buttonTheme.minWidth ? [ {
 			minWidth: buttonTheme.minWidth
-		},
-		(buttonTheme.maxWidth) && {
+		} ] : []),
+		...(buttonTheme.maxWidth ? [ {
 			minWidth: buttonTheme.maxWidth
-		},
-		(buttonTheme.maxHeight) && {
+		} ] : []),
+		...(buttonTheme.maxHeight ? [ {
 			minWidth: buttonTheme.maxHeight
-		},
+		} ] : []),
 		_style
 	]) as { style: ViewStyle }
 
