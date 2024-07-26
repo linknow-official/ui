@@ -8,6 +8,7 @@ import { LBLoading } from './LBLoading'
 import { LBText } from './LBText'
 import { LBView } from './LBView'
 import { ThemeProps } from './ThemeProps'
+import { useMediaQuery } from 'unicpeak-ui/hooks/useMediaQuery'
 
 export type BaseLBButtonProps = ThemeProps & TouchableOpacity['props'] & {
     variant?: ButtonVariant,
@@ -27,49 +28,53 @@ export type LBButtonProps = BaseLBButtonProps & {
 }
 
 export function LBButton (props: LBIconButtonProps | LBButtonProps) {
-	const { variant, style, children, loading, icon, override, ...rest } = props
+	const { variant, style: _style, children, loading, icon, override, ...rest } = props
 	const buttonTheme = useButton(variant, override)
 	const { spacing, color } = useLBTheme()
+
+	const { style } = useMediaQuery([
+		{
+			flexDirection: 'row',
+			backgroundColor: buttonTheme.background,
+			borderColor: buttonTheme.borderColor,
+			borderRadius: spacing(buttonTheme.borderRadius),
+			borderWidth: buttonTheme.borderWidth,
+			paddingHorizontal: spacing(buttonTheme.paddingHorizontal),
+			paddingVertical: spacing(buttonTheme.paddingVertical),
+			width: props.fullWidth ? '100%' : 'auto',
+			justifyContent: 'center',
+			alignItems: 'center'
+		},
+		(rest.disabled) && {
+			backgroundColor: buttonTheme.disabledBackground,
+			borderColor: buttonTheme.disabledBorderColor,
+			borderRadius: spacing(buttonTheme.disabledBorderRadius),
+			borderWidth: buttonTheme.disabledBorderWidth
+		},
+		(buttonTheme.minHeight) && {
+			minHeight: buttonTheme.minHeight
+		},
+		(buttonTheme.minWidth) && {
+			minWidth: buttonTheme.minWidth
+		},
+		(buttonTheme.maxWidth) && {
+			minWidth: buttonTheme.maxWidth
+		},
+		(buttonTheme.maxHeight) && {
+			minWidth: buttonTheme.maxHeight
+		},
+		_style
+	]) as { style: ViewStyle }
 
 	return (
 		<Pressable
 			style={({ pressed }) => [
-				{
-					flexDirection: 'row',
-					backgroundColor: buttonTheme.background,
-					borderColor: buttonTheme.borderColor,
-					borderRadius: spacing(buttonTheme.borderRadius),
-					borderWidth: buttonTheme.borderWidth,
-					paddingHorizontal: spacing(buttonTheme.paddingHorizontal),
-					paddingVertical: spacing(buttonTheme.paddingVertical),
-					width: props.fullWidth ? '100%' : 'auto',
-					justifyContent: 'center',
-					alignItems: 'center'
-				},
+				style,
 				(pressed || loading) && {
 					backgroundColor: buttonTheme.backgroundHover,
 					borderColor: buttonTheme.borderColorHover
-				},
-				(rest.disabled) && {
-					backgroundColor: buttonTheme.disabledBackground,
-					borderColor: buttonTheme.disabledBorderColor,
-					borderRadius: spacing(buttonTheme.disabledBorderRadius),
-					borderWidth: buttonTheme.disabledBorderWidth
-				},
-				(buttonTheme.minHeight) && {
-					minHeight: buttonTheme.minHeight
-				},
-				(buttonTheme.minWidth) && {
-					minWidth: buttonTheme.minWidth
-				},
-				(buttonTheme.maxWidth) && {
-					minWidth: buttonTheme.maxWidth
-				},
-				(buttonTheme.maxHeight) && {
-					minWidth: buttonTheme.maxHeight
-				},
-				style
-			] as ViewStyle[]}
+				}
+			] }
 			{...rest}
 			disabled={rest.disabled || loading}
 		>

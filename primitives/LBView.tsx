@@ -3,6 +3,7 @@ import React, { ReactElement } from 'react'
 import { View as DefaultView, FlatList, StyleProp, ViewStyle } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { ThemeProps } from './ThemeProps'
+import { useMediaQuery } from 'unicpeak-ui/hooks/useMediaQuery'
 
 const generateUniqueId = (() => {
 	let counter = 0
@@ -37,8 +38,10 @@ export type LBScrollViewProps = BaseLBViewProps & {
 export type LBViewProps = LBFlatViewProps | LBScrollViewProps
 
 export function LBView (props: LBViewProps) {
-	const { style, scrollView, grid, renderItemStyle, renderItemKey, flatList, children, direction = 'vertical', center, ...otherProps } = props
+	const { style: _style, scrollView, grid, renderItemStyle: _renderItemViewProps, renderItemKey, flatList, children, direction = 'vertical', center, ...otherProps } = props
 	const backgroundColor = useThemeColor('background')
+	const { style } = useMediaQuery(_style)
+	const renderItemStyle = useMediaQuery(_renderItemViewProps?.style)
 
 	if (grid){
 		return (
@@ -78,7 +81,9 @@ export function LBView (props: LBViewProps) {
 					if (renderItemStyle && item){
 						return <LBView
 							{...(renderItemKey ? { key: renderItemKey(index) } : { key: `${generateUniqueId()}_index` })}
-							{...renderItemStyle}>
+							{..._renderItemViewProps}
+							{...renderItemStyle}
+						>
 							{item}
 						</LBView>
 					}
@@ -120,7 +125,9 @@ export function LBView (props: LBViewProps) {
 					if (renderItemStyle && item){
 						return <LBView
 							{...(renderItemKey ? { key: renderItemKey(index) } : { key: `${generateUniqueId()}_index` })}
-							{...renderItemStyle}>
+							{..._renderItemViewProps}
+							{...renderItemStyle}
+						>
 							{item}
 						</LBView>
 					}
@@ -144,7 +151,9 @@ export function LBView (props: LBViewProps) {
 				if (renderItemStyle && item){
 					return <LBView
 						{...(renderItemKey ? { key: renderItemKey(index) } : { key: `${generateUniqueId()}_index` })}
-						{...renderItemStyle}>
+						{..._renderItemViewProps}
+						{...renderItemStyle}
+					>
 						{item}
 					</LBView>
 				}

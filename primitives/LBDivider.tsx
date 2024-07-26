@@ -1,6 +1,7 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, ViewProps } from 'react-native'
 import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
+import { useMediaQuery } from 'unicpeak-ui/hooks/useMediaQuery'
 
 export type DividerProps = {
   orientation?: 'vertical' | 'horizontal';
@@ -17,7 +18,7 @@ export function LBDivider ({ orientation = 'horizontal', length = 0.5, width, he
 		? { marginVertical: spacing(_spacing) }
 		: { marginHorizontal: spacing(_spacing) }
 
-	return <View style={[ {
+	const style = useMediaQuery([ {
 		...(orientation === 'vertical' && {
 			height: length,
 			width: '100%'
@@ -33,5 +34,7 @@ export function LBDivider ({ orientation = 'horizontal', length = 0.5, width, he
 			height
 		}),
 		backgroundColor: color('border')
-	}, borderStyle ]} />
+	}, borderStyle ]) as { style: ViewProps }
+
+	return <View {...style} />
 }

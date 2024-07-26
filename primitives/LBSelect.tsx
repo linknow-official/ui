@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleProp, View, ViewStyle } from 'react-native'
-import RNPickerSelect, { PickerSelectProps } from 'react-native-picker-select'
+import RNPickerSelect, { PickerSelectProps, PickerStyle } from 'react-native-picker-select'
 
 import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
 import { useThemeColor } from 'unicpeak-ui/hooks/useThemeColor'
@@ -8,6 +8,7 @@ import { useTypography } from 'unicpeak-ui/theme/useTypography'
 import { LBText } from './LBText'
 import { LBView } from './LBView'
 import { ThemeProps } from './ThemeProps'
+import { useMediaQuery } from 'unicpeak-ui/hooks/useMediaQuery'
 
 export type LBSelectProps = ThemeProps & PickerSelectProps & {
   containerStyle?: StyleProp<ViewStyle>;
@@ -22,12 +23,42 @@ export function LBSelect (props: LBSelectProps) {
 	const { spacing } = useLBTheme()
 	const typograpgyTheme = useTypography('subtle')
 
+	const containerViewStyle = useMediaQuery([ {
+		borderColor: inputBorderColor,
+		borderWidth: spacing(0.1),
+		borderRadius: spacing(1.5),
+		paddingVertical: spacing(1.5),
+		paddingHorizontal: spacing(3)
+	}, containerStyle ])
+
+	const rnPickerStyle = useMediaQuery({
+		inputIOS: {
+			minHeight: spacing(9),
+			color: typograpgyTheme.color,
+			fontSize: typograpgyTheme.fontSize,
+			lineHeight: typograpgyTheme.lineSpacing,
+			letterSpacing: typograpgyTheme.letterSpacing,
+			fontFamily: typograpgyTheme.fontWeight
+		},
+		inputAndroid: {
+			minHeight: spacing(9),
+			color: typograpgyTheme.color,
+			fontSize: typograpgyTheme.fontSize,
+			lineHeight: typograpgyTheme.lineSpacing,
+			letterSpacing: typograpgyTheme.letterSpacing,
+			fontFamily: typograpgyTheme.fontWeight
+		},
+		placeholder: {
+			color: useThemeColor('placeholder')
+		}
+	}) as { style: PickerStyle }
+
 	return (
 		<LBView
 			renderItemKey={(index) => `select_${label}_${index}`}
 			renderItemStyle={{
 				style: {
-					paddingVertical: spacing(0.2) 
+					paddingVertical: spacing(0.2)
 				}
 			}}
 		>
@@ -36,35 +67,9 @@ export function LBSelect (props: LBSelectProps) {
 					{label}
 				</LBText>
 			)}
-			<View style={[ {
-				borderColor: inputBorderColor,
-				borderWidth: spacing(0.1),
-				borderRadius: spacing(1.5),
-				paddingVertical: spacing(1.5),
-				paddingHorizontal: spacing(3)
-			}, containerStyle ]}>
+			<View {...containerViewStyle}>
 				<RNPickerSelect
-					style={{
-						inputIOS: {
-							minHeight: spacing(9),
-							color: typograpgyTheme.color,
-							fontSize: typograpgyTheme.fontSize,
-							lineHeight: typograpgyTheme.lineSpacing,
-							letterSpacing: typograpgyTheme.letterSpacing,
-							fontFamily: typograpgyTheme.fontWeight
-						},
-						inputAndroid: {
-							minHeight: spacing(9),
-							color: typograpgyTheme.color,
-							fontSize: typograpgyTheme.fontSize,
-							lineHeight: typograpgyTheme.lineSpacing,
-							letterSpacing: typograpgyTheme.letterSpacing,
-							fontFamily: typograpgyTheme.fontWeight
-						},
-						placeholder: {
-							color: useThemeColor('placeholder')
-						}
-					}}
+					{...rnPickerStyle}
 					useNativeAndroidPickerStyle={false}
 					{...otherProps}
 				/>
