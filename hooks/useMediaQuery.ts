@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Dimensions, StyleProp } from 'react-native'
+import { Dimensions, Platform, StyleProp } from 'react-native'
 import { Breakpoints, breakpoints } from 'unicpeak-ui/constants/Breakpoints'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -81,13 +81,17 @@ export function useMediaQuery<T> (style?: ExtendedStyleProp<T> | ExtendedStylePr
 			setReplacedStyle(replaceBreakpoints(style || {} as ExtendedStyleProp<T>, breakpoints, newWidth))
 		}
 
-		if (typeof window !== 'undefined'){
-			window.addEventListener('resize', handleResize)
+		if (Platform.OS == 'web'){
+			if (typeof window !== 'undefined'){
+				window.addEventListener('resize', handleResize)
+			}
 		}
 
 		return () => {
-			if (typeof window !== 'undefined'){
-				window.removeEventListener('resize', handleResize)
+			if (Platform.OS == 'web'){
+				if (typeof window !== 'undefined'){
+					window.removeEventListener('resize', handleResize)
+				}
 			}
 		}
 	}, [ style ])

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { Dimensions } from 'react-native'
-import { breakpoints, getDeviceBreakpoint } from 'unicpeak-ui/constants/Breakpoints'
+import { Dimensions, Platform } from 'react-native'
+import { Breakpoints, breakpoints, getDeviceBreakpoint } from 'unicpeak-ui/constants/Breakpoints'
 
-export function useDeviceBreakpoint () {
+export function useDeviceBreakpoint (maxBreakpoint?: keyof Breakpoints) {
 	const [ width, setWidth ] = useState(Dimensions.get('window').width)
 	const [ currentBreakpoint, setCurrentBreakpoint ] = useState(getDeviceBreakpoint(width, breakpoints))
 
@@ -14,16 +14,20 @@ export function useDeviceBreakpoint () {
 			setCurrentBreakpoint(newBreakpoint)
 		}
 
-		if (typeof window !== 'undefined'){
-			window.addEventListener('resize', handleResize)
+		if (Platform.OS == 'web'){
+			if (typeof window !== 'undefined'){
+				window.addEventListener('resize', handleResize)
+			}
 		}
 
 		return () => {
-			if (typeof window !== 'undefined'){
-				window.removeEventListener('resize', handleResize)
+			if (Platform.OS == 'web'){
+				if (typeof window !== 'undefined'){
+					window.removeEventListener('resize', handleResize)
+				}
 			}
 		}
 	}, [ width ])
 
-	return { currentBreakpoint }
+	return { currentBreakpoint: maxBreakpoint && width > breakpoints[maxBreakpoint || currentBreakpoint] ? maxBreakpoint : currentBreakpoint }
 }

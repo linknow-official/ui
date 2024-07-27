@@ -26,7 +26,7 @@ export function LBText (props: LBTextProps) {
 			color: props.color || typograpgyTheme.color,
 			fontSize: typograpgyTheme.fontSize,
 			letterSpacing: typograpgyTheme.letterSpacing,
-			...(Platform.OS == 'ios' ? { lineHeight: typograpgyTheme.lineSpacing } : {}),
+			...([ 'ios', 'web' ].includes(Platform.OS) ? { lineHeight: typograpgyTheme.lineSpacing } : {}),
 			fontFamily: fontWeight || typograpgyTheme.fontWeight,
 			borderBottomWidth: underlineWidth ? spacing(underlineWidth) : spacing(0)
 		}
