@@ -7,9 +7,10 @@ import { useThemeColor } from 'unicpeak-ui/hooks/useThemeColor'
 import { ViewStyle } from 'react-native'
 
 // TODO: unknown store
+import UnknownStore from 'unicpeak-ui/assets/icons/clipboard-x.svg'
+
 import { LBView } from 'unicpeak-ui/primitives/LBView'
-import AppStore from 'unicpeak-ui/assets/icons/app-store.svg'
-import UnknownStore from 'unicpeak-ui/assets/icons/app-store.svg'
+import AppStore from 'unicpeak-ui/assets/icons/zap.svg'
 import Adjust from 'unicpeak-ui/assets/icons/adjust.svg'
 import Appsflyer from 'unicpeak-ui/assets/icons/appsflyer.svg'
 import Calendar from 'unicpeak-ui/assets/icons/calendar.svg'
@@ -54,6 +55,8 @@ import Instagram from 'unicpeak-ui/assets/icons/instagram.svg'
 import Linkedin from 'unicpeak-ui/assets/icons/linkedin.svg'
 import Reddit from 'unicpeak-ui/assets/icons/reddit.svg'
 import Tiktok from 'unicpeak-ui/assets/icons/tiktok.svg'
+import Youtube from 'unicpeak-ui/assets/icons/youtube.svg'
+import Snapchat from 'unicpeak-ui/assets/icons/snapchat.svg'
 
 export type Icon =
 'apple' |
@@ -62,6 +65,8 @@ export type Icon =
 'linkedin' |
 'reddit' |
 'tiktok' |
+'youtube' |
+'snapchat' |
 'navigation-off' |
 'user' |
 'currency' |
@@ -119,6 +124,8 @@ const iconPaths: Record<Icon, IconProps> = {
 	'linkedin': Linkedin,
 	'reddit': Reddit,
 	'tiktok': Tiktok,
+	'youtube': Youtube,
+	'snapchat': Snapchat,
 	'navigation-off': NavigationOff,
 	'user': User,
 	'currency': Currency,
