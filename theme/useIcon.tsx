@@ -108,11 +108,20 @@ export type Icon =
 'refresh-cw' |
 'refrigerator';
 
+
+const sizeProperties = {
+	'small': 16,
+	'semi-medium': 24,
+	'medium': 32,
+	'semi-large': 48,
+	'large': 64
+}
+
 export type IconProps = React.FC<SvgProps> & {
     height?: number;
     width?: number;
     fill?: ReturnType<typeof useThemeColor>;
-    size?: 'small' | 'medium' | 'large';
+    size?: keyof typeof sizeProperties;
     coverShape?: 'circle' | 'square' | 'flex';
     containerStyle?: Partial<ViewStyle>;
 }
@@ -168,13 +177,6 @@ const iconPaths: Record<Icon, IconProps> = {
 	refrigerator: Refrigator
 }
 
-const sizeProperties = {
-	'small': 16,
-	'semi-medium': 24,
-	'medium': 32,
-	'semi-large': 48,
-	'large': 64
-}
 
 export function useIcon (icon: Icon, props?: Partial<IconProps>) {
 	const { color, spacing } = useLBTheme()
