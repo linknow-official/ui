@@ -114,7 +114,10 @@ const sizeProperties = {
 	'semi-medium': 24,
 	'medium': 32,
 	'semi-large': 48,
-	'large': 64
+	'large': 64,
+	'x-large': 96,
+	'xx-large': 128,
+	'xxx-large': 256
 }
 
 export type IconProps = React.FC<SvgProps> & {
