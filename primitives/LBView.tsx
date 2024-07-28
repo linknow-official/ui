@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react'
 import { View as DefaultView, FlatList, StyleProp, ViewStyle } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { ThemeProps } from './ThemeProps'
-import { ExtendedStyleProp, useMediaQuery } from 'unicpeak-ui/hooks/useMediaQuery'
+import { ExtendedStyleProp, generateMediaQuery, useMediaQuery, useWidth } from 'unicpeak-ui/hooks/useMediaQuery'
 
 const generateUniqueId = (() => {
 	let counter = 0
@@ -27,7 +27,8 @@ export type LBFlatViewProps = BaseLBViewProps & {
 } & Partial<FlatList['props']>
 
 export type LBGridViewProps = BaseLBViewProps & {
-    grid?: boolean,
+    grid: true,
+    renderGridItemStyle?: (item: React.ReactNode, index: number) => ExtendedStyleProp<BaseLBViewProps['style']>;
 } & Partial<DefaultView['props']>
 
 export type LBScrollViewProps = BaseLBViewProps & {
@@ -36,15 +37,18 @@ export type LBScrollViewProps = BaseLBViewProps & {
     contentContainerStyle?: ViewStyle,
 } & Partial<DefaultView['props']>
 
-export type LBViewProps = LBFlatViewProps | LBScrollViewProps
+export type LBViewProps = LBFlatViewProps | LBScrollViewProps | LBGridViewProps
 
 export function LBView (props: LBViewProps) {
-	const { style: _style, scrollView, grid, renderItemStyle: _renderItemViewProps, renderItemKey, flatList, children, direction = 'vertical', center, ...otherProps } = props
+	const { style: _style, scrollView, renderItemStyle: _renderItemViewProps, renderItemKey, flatList, children, center, ...otherProps } = props
 	const backgroundColor = useThemeColor('background')
 	const { style } = useMediaQuery(_style) as { style: ExtendedStyleProp<ViewStyle> }
 	const renderItemStyle = useMediaQuery(_renderItemViewProps?.style) as { style: ExtendedStyleProp<ViewStyle> }
+	const { width } = useWidth()
 
-	if (grid){
+	if (props.grid == true){
+		const { renderGridItemStyle } = props as LBGridViewProps
+
 		return (
 			<DefaultView
 				{...otherProps}
@@ -59,11 +63,12 @@ export function LBView (props: LBViewProps) {
 			>
 				{(children as React.ReactNode[])?.map((item, index) => (
 					<DefaultView
-						{...(renderItemKey ? { key: renderItemKey(index) } : { key: `${generateUniqueId()}_index` })}
 						style={{
-							flexBasis: '50%', // Adjust as needed for your grid layout
-							paddingHorizontal: 5 // Add spacing between grid items
+							flexBasis: '50%',
+							paddingHorizontal: 5,
+							...(renderGridItemStyle ? generateMediaQuery(renderGridItemStyle(item, index), width).styles as any || {} : {})
 						}}
+						{...(renderItemKey ? { key: renderItemKey(index) } : { key: `${generateUniqueId()}_index` })}
 					>
 						{item}
 					</DefaultView>
@@ -76,7 +81,7 @@ export function LBView (props: LBViewProps) {
 		return (
 			<FlatList<React.ReactNode>
 				bounces={false}
-				horizontal={direction === 'horizontal'}
+				horizontal={(props.direction || 'vertical') === 'horizontal'}
 				data={children as React.ReactNode[]}
 				renderItem={({ item, index }) => {
 					if (renderItemStyle && item){
@@ -96,7 +101,7 @@ export function LBView (props: LBViewProps) {
 						flexGrow: 1,
 						justifyContent: 'center'
 					}),
-					...otherProps?.contentContainerStyle as Partial<StyleProp<ViewStyle>>
+					...props?.contentContainerStyle as Partial<StyleProp<ViewStyle>>
 				}}
 				style={[ { backgroundColor }, style, { flex: 1 } ]}
 				{...otherProps}
@@ -110,7 +115,7 @@ export function LBView (props: LBViewProps) {
 				extraScrollHeight={64}
 				extraHeight={64}
 				bounces={false}
-				horizontal={direction === 'horizontal'}
+				horizontal={(props.direction || 'vertical') === 'horizontal'}
 				contentInsetAdjustmentBehavior='automatic'
 				{...otherProps}
 				contentContainerStyle={{
@@ -118,7 +123,7 @@ export function LBView (props: LBViewProps) {
 						flexGrow: 1,
 						justifyContent: 'center'
 					}),
-					...otherProps?.contentContainerStyle as Partial<StyleProp<ViewStyle>>
+					...props?.contentContainerStyle as Partial<StyleProp<ViewStyle>>
 				}}
 				style={[ { backgroundColor }, style, { flex: 1 } ]}
 			>
@@ -140,7 +145,7 @@ export function LBView (props: LBViewProps) {
 	}
 
 	const defaultViewStyle = useMediaQuery([
-		{ flexDirection: direction === 'horizontal' ? 'row' : 'column' },
+		{ flexDirection: (props.direction || 'vertical') === 'horizontal' ? 'row' : 'column' },
 		center && { alignItems: 'center', justifyContent: 'center' },
 		style
 	])

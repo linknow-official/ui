@@ -71,14 +71,27 @@ const replaceBreakpoints = <T>(style: ExtendedStyleProp<T>, breakpoints: Breakpo
 }
 
 export function useMediaQuery<T> (style?: ExtendedStyleProp<T> | ExtendedStyleProp<T>[] |null) {
-	const [ width, setWidth ] = useState(Dimensions.get('window').width)
+	const { width } = useWidth()
+
 	const [ replacedStyle, setReplacedStyle ] = useState(replaceBreakpoints(style || {} as ExtendedStyleProp<T>, breakpoints, width))
+	useEffect(() => {
+		setReplacedStyle(replaceBreakpoints(style || {} as ExtendedStyleProp<T>, breakpoints, width))
+	}, [ style ])
+
+	return { style: replacedStyle as StyleProp<T> }
+}
+
+export function generateMediaQuery<T> (style: ExtendedStyleProp<T> | ExtendedStyleProp<T>[] | null, width: number) {
+	return { styles: replaceBreakpoints(style || {} as ExtendedStyleProp<T>, breakpoints, width) }
+}
+
+export function useWidth () {
+	const [ width, setWidth ] = useState(Dimensions.get('window').width)
 
 	useEffect(() => {
 		const handleResize = () => {
 			const newWidth = Dimensions.get('window').width
 			setWidth(newWidth)
-			setReplacedStyle(replaceBreakpoints(style || {} as ExtendedStyleProp<T>, breakpoints, newWidth))
 		}
 
 		if (Platform.OS == 'web'){
@@ -94,7 +107,7 @@ export function useMediaQuery<T> (style?: ExtendedStyleProp<T> | ExtendedStylePr
 				}
 			}
 		}
-	}, [ style ])
+	}, [ ])
 
-	return { style: replacedStyle as StyleProp<T> }
+	return { width }
 }
