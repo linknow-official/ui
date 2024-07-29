@@ -57,9 +57,11 @@ import Reddit from 'unicpeak-ui/assets/icons/reddit.svg'
 import Tiktok from 'unicpeak-ui/assets/icons/tiktok.svg'
 import Youtube from 'unicpeak-ui/assets/icons/youtube.svg'
 import Snapchat from 'unicpeak-ui/assets/icons/snapchat.svg'
+import XSocialMedia from 'unicpeak-ui/assets/icons/x-social-media.svg'
 
 export type Icon =
 'apple' |
+'x-social-media' |
 'facebook' |
 'instagram' |
 'linkedin' |
@@ -131,6 +133,7 @@ export type IconProps = React.FC<SvgProps> & {
 
 const iconPaths: Record<Icon, IconProps> = {
 	'apple': Apple,
+	'x-social-media': XSocialMedia,
 	'facebook': Facebook,
 	'instagram': Instagram,
 	'linkedin': Linkedin,

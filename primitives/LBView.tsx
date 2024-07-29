@@ -1,6 +1,6 @@
 import { useThemeColor } from 'unicpeak-ui/hooks/useThemeColor'
 import React, { ReactElement } from 'react'
-import { View as DefaultView, FlatList, StyleProp, ViewStyle } from 'react-native'
+import { View as DefaultView, FlatList, Platform, StyleProp, ViewStyle } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { ThemeProps } from './ThemeProps'
 import { ExtendedStyleProp, generateMediaQuery, useMediaQuery, useWidth } from 'unicpeak-ui/hooks/useMediaQuery'
@@ -38,15 +38,16 @@ export function LBView (props: LBViewProps) {
 	const { style: _style, scrollView, renderItemStyle: _renderItemViewProps, renderItemKey, flatList, children, center, ...otherProps } = props
 	const backgroundColor = useThemeColor('background')
 	const { width } = useWidth()
-	const { style } = useMediaQuery(_style) as { style: ExtendedStyleProp<ViewStyle> }
-	const renderItemStyle = useMediaQuery(_renderItemViewProps?.style) as { style: ExtendedStyleProp<ViewStyle> }
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const { style } = (Platform.OS == 'web' ? useMediaQuery(_style) as { style: ExtendedStyleProp<ViewStyle> } : { style: generateMediaQuery(_style as ExtendedStyleProp<ViewStyle>, width).styles }) as { style: any }
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const renderItemStyle = Platform.OS == 'web' ? useMediaQuery(_renderItemViewProps?.style) as { style: ExtendedStyleProp<ViewStyle> } : { style: generateMediaQuery((_renderItemViewProps as any)?.style, width).styles }
+	const { renderGridItemStyle } = props as LBGridViewProps
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const renderGridItemStyles = (children as React.ReactNode[])?.length > 0 ? (children as React.ReactNode[])?.map((item, index) => (renderGridItemStyle ? generateMediaQuery(renderGridItemStyle(item, index), width).styles as any || {} : {})) : []
 
 
 	if (props.grid == true){
-		const { renderGridItemStyle } = props as LBGridViewProps
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const renderGridItemStyles = (children as React.ReactNode[])?.map((item, index) => (renderGridItemStyle ? generateMediaQuery(renderGridItemStyle(item, index), width).styles as any || {} : {}))
-
 		return (
 			<DefaultView
 				{...otherProps}
@@ -66,7 +67,8 @@ export function LBView (props: LBViewProps) {
 							paddingHorizontal: 5,
 							...renderGridItemStyles?.[index]
 						}}
-						{...(renderItemKey ? { key: renderItemKey(index) } : { })}
+						// eslint-disable-next-line @typescript-eslint/no-explicit-any
+						{...(renderItemKey ? { key: renderItemKey(index) } : { key: (item as any)['dataProp'].key })}
 					>
 						{item}
 					</DefaultView>
@@ -84,7 +86,8 @@ export function LBView (props: LBViewProps) {
 				renderItem={({ item, index }) => {
 					if (renderItemStyle && item){
 						return <LBView
-							{...(renderItemKey ? { key: renderItemKey(index) } : { })}
+							// eslint-disable-next-line @typescript-eslint/no-explicit-any
+							{...(renderItemKey ? { key: renderItemKey(index) } : { key: (item as any)['dataProp'].key })}
 							{..._renderItemViewProps}
 							{...renderItemStyle}
 						>
@@ -128,7 +131,8 @@ export function LBView (props: LBViewProps) {
 				{(children as React.ReactNode[])?.length > 0 ? (children as React.ReactNode[]).map((item, index) => {
 					if (renderItemStyle && item){
 						return <LBView
-							{...(renderItemKey ? { key: renderItemKey(index) } : { })}
+							// eslint-disable-next-line @typescript-eslint/no-explicit-any
+							{...(renderItemKey ? { key: renderItemKey(index) } : { key: (item as any)['dataProp'].key })}
 							{..._renderItemViewProps}
 							{...renderItemStyle}
 						>
@@ -156,7 +160,8 @@ export function LBView (props: LBViewProps) {
 			{(children as React.ReactNode[])?.length > 0 ? (children as React.ReactNode[]).map((item, index) => {
 				if (renderItemStyle && item){
 					return <LBView
-						{...(renderItemKey ? { key: renderItemKey(index) } : { })}
+						// eslint-disable-next-line @typescript-eslint/no-explicit-any
+						{...(renderItemKey ? { key: renderItemKey(index) } : { key: (item as any)['dataProp'].key })}
 						{..._renderItemViewProps}
 						{...renderItemStyle}
 					>
