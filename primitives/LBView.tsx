@@ -1,5 +1,5 @@
 import { useThemeColor } from 'unicpeak-ui/hooks/useThemeColor'
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useMemo } from 'react'
 import { View as DefaultView, FlatList, Platform, StyleProp, ViewStyle } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { ThemeProps } from './ThemeProps'
@@ -46,12 +46,12 @@ export function LBView (props: LBViewProps) {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const { style } = (Platform.OS == 'web' ? useMediaQuery(_style) as { style: ExtendedStyleProp<ViewStyle> } : { style: generateMediaQuery(_style as ExtendedStyleProp<ViewStyle>, width).styles }) as { style: any }
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const renderItemStyle = Platform.OS == 'web' ? useMediaQuery(_renderItemViewProps?.style) as { style: ExtendedStyleProp<ViewStyle> } : { style: generateMediaQuery((_renderItemViewProps as any)?.style, width).styles }
+	const renderItemStyle = { style: generateMediaQuery((_renderItemViewProps as any)?.style, width).styles }
 	const { renderGridItemStyle } = props as LBGridViewProps
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const renderGridItemStyles = (children as React.ReactNode[])?.length > 0 ? (children as React.ReactNode[])?.map((item, index) => (renderGridItemStyle ? generateMediaQuery(renderGridItemStyle(item, index), width).styles as any || {} : {})) : []
 
-	const uniqueId = generateUniqueId()
+	const uniqueId = useMemo(() => generateUniqueId(), [])
 
 	if (props.grid == true){
 		return (
