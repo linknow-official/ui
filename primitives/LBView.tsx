@@ -5,6 +5,11 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { ThemeProps } from './ThemeProps'
 import { ExtendedStyleProp, generateMediaQuery, useMediaQuery, useWidth } from 'unicpeak-ui/hooks/useMediaQuery'
 
+const generateUniqueId = (() => {
+	let counter = 0
+	return () => `custom-id-${counter++}`
+})()
+
 type BaseLBViewProps = ThemeProps & {
     scrollView?: boolean,
     flatList?: boolean,
@@ -46,6 +51,7 @@ export function LBView (props: LBViewProps) {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const renderGridItemStyles = (children as React.ReactNode[])?.length > 0 ? (children as React.ReactNode[])?.map((item, index) => (renderGridItemStyle ? generateMediaQuery(renderGridItemStyle(item, index), width).styles as any || {} : {})) : []
 
+	const uniqueId = generateUniqueId()
 
 	if (props.grid == true){
 		return (
@@ -67,8 +73,8 @@ export function LBView (props: LBViewProps) {
 							paddingHorizontal: 5,
 							...renderGridItemStyles?.[index]
 						}}
-						// eslint-disable-next-line @typescript-eslint/no-explicit-any
-						{...(renderItemKey ? { key: renderItemKey(index) } : { key: (item as any)['dataProp'].key })}
+
+						{...(renderItemKey ? { key: renderItemKey(index) } : { })}
 					>
 						{item}
 					</DefaultView>
@@ -86,8 +92,8 @@ export function LBView (props: LBViewProps) {
 				renderItem={({ item, index }) => {
 					if (renderItemStyle && item){
 						return <LBView
-							// eslint-disable-next-line @typescript-eslint/no-explicit-any
-							{...(renderItemKey ? { key: renderItemKey(index) } : { key: (item as any)['dataProp'].key })}
+
+							{...(renderItemKey ? { key: renderItemKey(index) } : { key: uniqueId + index })}
 							{..._renderItemViewProps}
 							{...renderItemStyle}
 						>
@@ -131,8 +137,8 @@ export function LBView (props: LBViewProps) {
 				{(children as React.ReactNode[])?.length > 0 ? (children as React.ReactNode[]).map((item, index) => {
 					if (renderItemStyle && item){
 						return <LBView
-							// eslint-disable-next-line @typescript-eslint/no-explicit-any
-							{...(renderItemKey ? { key: renderItemKey(index) } : { key: (item as any)['dataProp'].key })}
+
+							{...(renderItemKey ? { key: renderItemKey(index) } : { key: uniqueId + index })}
 							{..._renderItemViewProps}
 							{...renderItemStyle}
 						>
@@ -160,8 +166,8 @@ export function LBView (props: LBViewProps) {
 			{(children as React.ReactNode[])?.length > 0 ? (children as React.ReactNode[]).map((item, index) => {
 				if (renderItemStyle && item){
 					return <LBView
-						// eslint-disable-next-line @typescript-eslint/no-explicit-any
-						{...(renderItemKey ? { key: renderItemKey(index) } : { key: (item as any)['dataProp'].key })}
+
+						{...(renderItemKey ? { key: renderItemKey(index) } : { key: uniqueId + index })}
 						{..._renderItemViewProps}
 						{...renderItemStyle}
 					>
