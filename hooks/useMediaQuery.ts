@@ -43,12 +43,22 @@ const findMaxBreakpoint = <T>(style: ExtendedStyleProp<T>, breakpoints: Breakpoi
 	return maxBreakpoint
 }
 
-const replaceBreakpoints = <T>(style: ExtendedStyleProp<T>, breakpoints: Breakpoints, width: number): StyleProp<T> => {
+const replaceBreakpoints = <T>(
+	style: ExtendedStyleProp<T>,
+	breakpoints: Breakpoints,
+	width: number,
+	recursionLimit: number = 5,
+	currentDepth: number = 0
+): StyleProp<T> => {
+	if (currentDepth > recursionLimit){
+		return style
+	}
+
 	const closestBreakpoint = findClosestBreakpoint(width, breakpoints)
 
 	if (Array.isArray(style)){
 		return style
-			.map((item) => replaceBreakpoints(item as ExtendedStyleProp<T>, breakpoints, width))
+			.map((item) => replaceBreakpoints(item as ExtendedStyleProp<T>, breakpoints, width, recursionLimit, currentDepth + 1))
 			.reduce((pv, cv) => mergeStyles(pv, cv), {} as ExtendedStyleProp<T>) as StyleProp<T>
 	}else if (typeof style === 'object' && style !== null){
 		const baseStyle: Record<string, unknown> = {}
@@ -62,7 +72,7 @@ const replaceBreakpoints = <T>(style: ExtendedStyleProp<T>, breakpoints: Breakpo
 
 		const maxBreakpoint = findMaxBreakpoint(style, breakpoints, closestBreakpoint as keyof Breakpoints)
 		if (maxBreakpoint){
-			Object.assign(breakpointStyle, replaceBreakpoints(style[maxBreakpoint as keyof Breakpoints] as ExtendedStyleProp<T>, breakpoints, width))
+			Object.assign(breakpointStyle, replaceBreakpoints(style[maxBreakpoint as keyof Breakpoints] as ExtendedStyleProp<T>, breakpoints, width, recursionLimit, currentDepth + 1))
 		}
 
 		return mergeStyles(baseStyle, breakpointStyle) as StyleProp<T>

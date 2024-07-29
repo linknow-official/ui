@@ -5,11 +5,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { ThemeProps } from './ThemeProps'
 import { ExtendedStyleProp, generateMediaQuery, useMediaQuery, useWidth } from 'unicpeak-ui/hooks/useMediaQuery'
 
-const generateUniqueId = (() => {
-	let counter = 0
-	return () => `custom-id-${counter++}`
-})()
-
 type BaseLBViewProps = ThemeProps & {
     scrollView?: boolean,
     flatList?: boolean,
@@ -42,12 +37,15 @@ export type LBViewProps = LBFlatViewProps | LBScrollViewProps | LBGridViewProps
 export function LBView (props: LBViewProps) {
 	const { style: _style, scrollView, renderItemStyle: _renderItemViewProps, renderItemKey, flatList, children, center, ...otherProps } = props
 	const backgroundColor = useThemeColor('background')
+	const { width } = useWidth()
 	const { style } = useMediaQuery(_style) as { style: ExtendedStyleProp<ViewStyle> }
 	const renderItemStyle = useMediaQuery(_renderItemViewProps?.style) as { style: ExtendedStyleProp<ViewStyle> }
-	const { width } = useWidth()
+
 
 	if (props.grid == true){
 		const { renderGridItemStyle } = props as LBGridViewProps
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		const renderGridItemStyles = (children as React.ReactNode[])?.map((item, index) => (renderGridItemStyle ? generateMediaQuery(renderGridItemStyle(item, index), width).styles as any || {} : {}))
 
 		return (
 			<DefaultView
@@ -61,18 +59,18 @@ export function LBView (props: LBViewProps) {
 					style
 				]}
 			>
-				{(children as React.ReactNode[])?.map((item, index) => (
+				{(children as React.ReactNode[])?.length > 0 ? (children as React.ReactNode[])?.map((item, index) => (
 					<DefaultView
 						style={{
 							flexBasis: '50%',
 							paddingHorizontal: 5,
-							...(renderGridItemStyle ? generateMediaQuery(renderGridItemStyle(item, index), width).styles as any || {} : {})
+							...renderGridItemStyles?.[index]
 						}}
-						{...(renderItemKey ? { key: renderItemKey(index) } : { key: `${generateUniqueId()}_index` })}
+						{...(renderItemKey ? { key: renderItemKey(index) } : { })}
 					>
 						{item}
 					</DefaultView>
-				))}
+				)) : children}
 			</DefaultView>
 		)
 	}
@@ -86,7 +84,7 @@ export function LBView (props: LBViewProps) {
 				renderItem={({ item, index }) => {
 					if (renderItemStyle && item){
 						return <LBView
-							{...(renderItemKey ? { key: renderItemKey(index) } : { key: `${generateUniqueId()}_index` })}
+							{...(renderItemKey ? { key: renderItemKey(index) } : { })}
 							{..._renderItemViewProps}
 							{...renderItemStyle}
 						>
@@ -130,7 +128,7 @@ export function LBView (props: LBViewProps) {
 				{(children as React.ReactNode[])?.length > 0 ? (children as React.ReactNode[]).map((item, index) => {
 					if (renderItemStyle && item){
 						return <LBView
-							{...(renderItemKey ? { key: renderItemKey(index) } : { key: `${generateUniqueId()}_index` })}
+							{...(renderItemKey ? { key: renderItemKey(index) } : { })}
 							{..._renderItemViewProps}
 							{...renderItemStyle}
 						>
@@ -158,7 +156,7 @@ export function LBView (props: LBViewProps) {
 			{(children as React.ReactNode[])?.length > 0 ? (children as React.ReactNode[]).map((item, index) => {
 				if (renderItemStyle && item){
 					return <LBView
-						{...(renderItemKey ? { key: renderItemKey(index) } : { key: `${generateUniqueId()}_index` })}
+						{...(renderItemKey ? { key: renderItemKey(index) } : { })}
 						{..._renderItemViewProps}
 						{...renderItemStyle}
 					>
