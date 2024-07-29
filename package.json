@@ -1,6 +1,6 @@
 {
     "name": "unicpeak-ui",
-    "version": "1.0.17",
+    "version": "1.0.18",
     "scripts": {
         "build": "tsc",
         "test": "jest --watchAll",
