@@ -50,6 +50,9 @@ const replaceBreakpoints = <T>(
 	recursionLimit: number = 5,
 	currentDepth: number = 0
 ): StyleProp<T> => {
+	if (!(style.xs || style.sm || style.md || style.lg || style.xl))
+		return style
+
 	if (currentDepth > recursionLimit){
 		return style
 	}

@@ -46,7 +46,7 @@ export function useTypography (variant: TypographyVariant, override?: Partial<Ty
 		h1: {
 			fontSize: spacing(12),
 			lineSpacing: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(12) : `${spacing(12)}px`,
-			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(12) : '0px',
+			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(12) : `${spacing(12)}px`,
 			color: color('text'),
 			letterSpacing: spacing(-0.012),
 			fontWeight: 'extra-bold'
@@ -54,7 +54,7 @@ export function useTypography (variant: TypographyVariant, override?: Partial<Ty
 		h2: {
 			fontSize: spacing(30 / 5),
 			lineSpacing: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(9) : `${spacing(9)}px`,
-			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(9) : '0px',
+			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(9) : `${spacing(9)}px`,
 			color: color('text'),
 			letterSpacing: spacing(-0.075),
 			fontWeight: 'semi-bold'
@@ -62,7 +62,7 @@ export function useTypography (variant: TypographyVariant, override?: Partial<Ty
 		h3: {
 			fontSize: spacing(6),
 			lineSpacing: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(8) : `${spacing(8)}px`,
-			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(8) : '0px',
+			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(8) : `${spacing(8)}px`,
 			color: color('text'),
 			letterSpacing: spacing(-0.06),
 			fontWeight: 'semi-bold'
@@ -70,7 +70,7 @@ export function useTypography (variant: TypographyVariant, override?: Partial<Ty
 		h4: {
 			fontSize: spacing(5),
 			lineSpacing: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(7) : `${spacing(7)}px`,
-			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(7) : '0px',
+			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(7) : `${spacing(7)}px`,
 			color: color('text'),
 			letterSpacing: spacing(-0.05),
 			fontWeight: 'semi-bold'

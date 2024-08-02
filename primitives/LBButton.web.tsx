@@ -8,7 +8,7 @@ import { LBLoading } from './LBLoading'
 import { LBText } from './LBText'
 import { LBView } from './LBView'
 import { ThemeProps } from './ThemeProps'
-import { ExtendedStyleProp, generateMediaQuery, useMediaQuery, useWidth } from 'unicpeak-ui/hooks/useMediaQuery'
+import { ExtendedStyleProp, useMediaQuery } from 'unicpeak-ui/hooks/useMediaQuery'
 
 export type BaseLBButtonProps = ThemeProps & TouchableOpacity['props'] & {
     variant?: ButtonVariant,
@@ -32,9 +32,8 @@ export function LBButton (props: LBIconButtonProps | LBButtonProps) {
 	const { variant, style: _style, children, loading, icon, override, ...rest } = props
 	const buttonTheme = useButton(variant, override)
 	const { spacing, color } = useLBTheme()
-	const { width } = useWidth()
 
-	const { style } = { style: generateMediaQuery([
+	const { style } = useMediaQuery([
 		{
 			flexDirection: 'row',
 			backgroundColor: buttonTheme.background,
@@ -66,7 +65,7 @@ export function LBButton (props: LBIconButtonProps | LBButtonProps) {
 			minWidth: buttonTheme.maxHeight
 		} ] : []),
 		_style
-	], width).styles } as { style: ViewStyle }
+	]) as { style: ViewStyle }
 
 	return (
 		<Pressable

@@ -3,7 +3,7 @@ import React, { ReactElement, useMemo } from 'react'
 import { View as DefaultView, FlatList, StyleProp, ViewStyle } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { ThemeProps } from './ThemeProps'
-import { ExtendedStyleProp } from 'unicpeak-ui/hooks/useMediaQuery'
+import { ExtendedStyleProp, generateMediaQuery, useMediaQuery, useWidth } from 'unicpeak-ui/hooks/useMediaQuery'
 
 const generateUniqueId = (() => {
 	let counter = 0
@@ -40,16 +40,17 @@ export type LBScrollViewProps = BaseLBViewProps & {
 export type LBViewProps = LBFlatViewProps | LBScrollViewProps | LBGridViewProps
 
 export function LBView (props: LBViewProps) {
-	const { style: _style, scrollView, renderItemStyle, renderItemKey, flatList, children, center, ...otherProps } = props
+	const { style: _style, scrollView, renderItemStyle: _renderItemViewProps, renderItemKey, flatList, children, center, ...otherProps } = props
 	const backgroundColor = useThemeColor('background')
-
-	const { style } = { style: _style } as { style: ExtendedStyleProp<ViewStyle> }
-
+	const { width } = useWidth()
+	const { style } = useMediaQuery(_style) as { style: ExtendedStyleProp<ViewStyle> }
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const renderItemStyle = { style: generateMediaQuery((_renderItemViewProps as any)?.style, width).styles }
+	const { renderGridItemStyle } = props as LBGridViewProps
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const renderGridItemStyles = (children as React.ReactNode[])?.length > 0 ? (children as React.ReactNode[])?.map((item, index) => (renderGridItemStyle ? generateMediaQuery(renderGridItemStyle(item, index), width).styles as any || {} : {})) : []
 
 	const uniqueId = useMemo(() => generateUniqueId(), [])
-
-	const { renderGridItemStyle } = props as LBGridViewProps
-	const renderGridItemStyles = (children as React.ReactNode[])?.length > 0 ? (children as React.ReactNode[])?.map((item, index) => (renderGridItemStyle ? renderGridItemStyle(item, index) : {}) || {}) : []
 
 	if (props.grid == true){
 		return (
@@ -69,7 +70,7 @@ export function LBView (props: LBViewProps) {
 						style={{
 							flexBasis: '50%',
 							paddingHorizontal: 5,
-							...(renderGridItemStyles?.[index] ? renderGridItemStyles : {})
+							...renderGridItemStyles?.[index]
 						}}
 
 						{...(renderItemKey ? { key: renderItemKey(index) } : { })}
@@ -92,6 +93,7 @@ export function LBView (props: LBViewProps) {
 						return <LBView
 
 							{...(renderItemKey ? { key: renderItemKey(index) } : { key: uniqueId + index })}
+							{..._renderItemViewProps}
 							{...renderItemStyle}
 						>
 							{item}
@@ -117,6 +119,7 @@ export function LBView (props: LBViewProps) {
 		return (
 			<KeyboardAwareScrollView
 				extraScrollHeight={64}
+				extraHeight={64}
 				bounces={false}
 				horizontal={(props.direction || 'vertical') === 'horizontal'}
 				contentInsetAdjustmentBehavior='automatic'
@@ -135,6 +138,7 @@ export function LBView (props: LBViewProps) {
 						return <LBView
 
 							{...(renderItemKey ? { key: renderItemKey(index) } : { key: uniqueId + index })}
+							{..._renderItemViewProps}
 							{...renderItemStyle}
 						>
 							{item}
@@ -147,11 +151,11 @@ export function LBView (props: LBViewProps) {
 		)
 	}
 
-	const defaultViewStyle = { style: [
+	const defaultViewStyle = useMediaQuery([
 		{ flexDirection: (props.direction || 'vertical') === 'horizontal' ? 'row' : 'column' },
 		center && { alignItems: 'center', justifyContent: 'center' },
 		style
-	] } as { style: ExtendedStyleProp<ViewStyle> }
+	])
 
 	return (
 		<DefaultView
@@ -161,7 +165,9 @@ export function LBView (props: LBViewProps) {
 			{(children as React.ReactNode[])?.length > 0 ? (children as React.ReactNode[]).map((item, index) => {
 				if (renderItemStyle && item){
 					return <LBView
+
 						{...(renderItemKey ? { key: renderItemKey(index) } : { key: uniqueId + index })}
+						{..._renderItemViewProps}
 						{...renderItemStyle}
 					>
 						{item}
