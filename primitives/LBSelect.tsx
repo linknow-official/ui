@@ -37,7 +37,8 @@ export function LBSelect (props: LBSelectProps) {
 			minHeight: spacing(9),
 			color: typograpgyTheme.color,
 			fontSize: typograpgyTheme.fontSize,
-			lineHeight: typograpgyTheme.lineSpacing,
+			lineSpacing: typograpgyTheme.lineSpacing,
+			lineHeight: typograpgyTheme.lineHeight,
 			letterSpacing: typograpgyTheme.letterSpacing,
 			fontFamily: typograpgyTheme.fontWeight
 		},
@@ -45,7 +46,8 @@ export function LBSelect (props: LBSelectProps) {
 			minHeight: spacing(9),
 			color: typograpgyTheme.color,
 			fontSize: typograpgyTheme.fontSize,
-			lineHeight: typograpgyTheme.lineSpacing,
+			lineSpacing: typograpgyTheme.lineSpacing,
+			lineHeight: typograpgyTheme.lineHeight,
 			letterSpacing: typograpgyTheme.letterSpacing,
 			fontFamily: typograpgyTheme.fontWeight
 		},

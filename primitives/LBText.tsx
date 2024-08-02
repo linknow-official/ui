@@ -26,7 +26,7 @@ export function LBText (props: LBTextProps) {
 			color: props.color || typograpgyTheme.color,
 			fontSize: typograpgyTheme.fontSize,
 			letterSpacing: typograpgyTheme.letterSpacing,
-			...([ 'ios', 'web' ].includes(Platform.OS) ? { lineHeight: typograpgyTheme.lineSpacing } : {}),
+			...([ 'ios', 'web' ].includes(Platform.OS) ? { lineHeight: typograpgyTheme.lineHeight as number } : { lineSpacing: typograpgyTheme.lineSpacing as number }),
 			fontFamily: fontWeight || typograpgyTheme.fontWeight,
 			borderBottomWidth: underlineWidth ? spacing(underlineWidth) : spacing(0)
 		}
@@ -48,6 +48,22 @@ export function LBText (props: LBTextProps) {
 		_style
 	])
 
+	if ([ 'ios', 'android' ].includes(Platform.OS))
+		return <DefaultText {...style} {...otherProps} />
 
-	return <DefaultText {...style} {...otherProps} />
+	if (variant == 'h1')
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		return <h1 {...style as any} {...otherProps} />
+	if (variant == 'h2')
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		return <h2 {...style as any} {...otherProps} />
+	if (variant == 'h3')
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		return <h3 {...style as any} {...otherProps} />
+	if (variant == 'h4')
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		return <h4 {...style as any} {...otherProps} />
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	return <span {...style as any} {...otherProps} />
 }

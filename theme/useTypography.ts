@@ -1,3 +1,4 @@
+import { Platform } from 'react-native'
 import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
 import { useThemeColor } from 'unicpeak-ui/hooks/useThemeColor'
 
@@ -29,7 +30,8 @@ export type TypographyWeight =
 
 export type TypographyTheme = {
     fontSize?: number,
-    lineSpacing: number,
+    lineSpacing: number | `${number}px`,
+    lineHeight: number | `${number}px`,
     color: ReturnType<typeof useThemeColor>,
     letterSpacing: number,
     fontWeight: TypographyWeight
@@ -42,99 +44,113 @@ export function useTypography (variant: TypographyVariant, override?: Partial<Ty
 
 	const typographyTheme: UseTypography = {
 		h1: {
-			fontSize: 48,
-			lineSpacing: 48,
+			fontSize: spacing(12),
+			lineSpacing: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(12) : `${spacing(12)}px`,
+			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(12) : '0px',
 			color: color('text'),
 			letterSpacing: spacing(-0.012),
 			fontWeight: 'extra-bold'
 		},
 		h2: {
-			fontSize: 30,
-			lineSpacing: 36,
+			fontSize: spacing(30 / 5),
+			lineSpacing: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(9) : `${spacing(9)}px`,
+			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(9) : '0px',
 			color: color('text'),
 			letterSpacing: spacing(-0.075),
 			fontWeight: 'semi-bold'
 		},
 		h3: {
-			fontSize: 24,
-			lineSpacing: 32,
+			fontSize: spacing(6),
+			lineSpacing: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(8) : `${spacing(8)}px`,
+			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(8) : '0px',
 			color: color('text'),
 			letterSpacing: spacing(-0.06),
 			fontWeight: 'semi-bold'
 		},
 		h4: {
-			fontSize: 20,
-			lineSpacing: 28,
+			fontSize: spacing(5),
+			lineSpacing: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(7) : `${spacing(7)}px`,
+			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(7) : '0px',
 			color: color('text'),
 			letterSpacing: spacing(-0.05),
 			fontWeight: 'semi-bold'
 		},
 		p: {
-			fontSize: 16,
-			lineSpacing: 28,
+			fontSize: spacing(4),
+			lineSpacing: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(7) : `${spacing(7)}px`,
+			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(7) : `${spacing(7)}px`,
 			color: color('text'),
 			letterSpacing: 0,
 			fontWeight: 'regular'
 		},
 		body: {
-			fontSize: 14,
-			lineSpacing: 24,
+			fontSize: spacing(14 / 4),
+			lineSpacing: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(6) : `${spacing(6)}px`,
+			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(6) : `${spacing(6)}px`,
 			color: color('text'),
 			letterSpacing: 0,
 			fontWeight: 'regular'
 		},
 		'table-head': {
-			fontSize: 16,
-			lineSpacing: 24,
+			fontSize: spacing(4),
+			lineSpacing: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(6) : `${spacing(6)}px`,
+			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(6) : `${spacing(6)}px`,
 			color: color('text'),
 			letterSpacing: 0,
 			fontWeight: 'bold'
 		},
 		'table-item': {
-			fontSize: 16,
-			lineSpacing: 24,
+			fontSize: spacing(4),
+			lineSpacing: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(6) : `${spacing(6)}px`,
+			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(6) : `${spacing(6)}px`,
 			color: color('text'),
 			letterSpacing: 0,
 			fontWeight: 'regular'
 		},
 		list: {
-			fontSize: 16,
-			lineSpacing: 24,
+			fontSize: spacing(4),
+			lineSpacing: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(7) : `${spacing(7)}px`,
+			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(7) : `${spacing(7)}px`,
 			color: color('text'),
 			letterSpacing: 0,
 			fontWeight: 'regular'
 		},
 		lead: {
-			fontSize: 20,
-			lineSpacing: 28,
+			fontSize: spacing(5),
+			lineSpacing: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(8) : `${spacing(8)}px`,
+			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(8) : `${spacing(8)}px`,
 			color: color('text'),
 			letterSpacing: 0,
 			fontWeight: 'regular'
 		},
 		large: {
-			fontSize: 18,
-			lineSpacing: 28,
+			fontSize: spacing(18 / 4),
+			lineSpacing: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(8) : `${spacing(8)}px`,
+			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(8) : `${spacing(8)}px`,
 			color: color('black'),
 			letterSpacing: 0,
 			fontWeight: 'regular'
 		},
 		small: {
-			fontSize: 14,
-			lineSpacing: 14,
+			fontSize: spacing(14 / 4),
+			lineSpacing: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(14 / 4) : `${spacing(4)}px`,
+			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(14 / 4) : `${spacing(4)}px`,
 			color: color('black'),
 			letterSpacing: 0,
 			fontWeight: 'medium'
 		},
 		detail: {
-			fontSize: 14,
-			lineSpacing: 20,
+			fontSize: spacing(14 / 4),
+			lineSpacing: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(5) : `${spacing(5)}px`,
+			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(5) : `${spacing(5)}px`,
 			color: color('secondary'),
 			letterSpacing: 0,
 			fontWeight: 'medium'
 		},
 		subtle: {
-			fontSize: 15,
-			lineSpacing: 20,
+			fontSize: spacing(15 / 4),
+			lineSpacing: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(5) : `${spacing(5)}px`,
+			lineHeight: [ 'ios', 'android' ].includes(Platform.OS) ? spacing(5) : `${spacing(5)}px`,
 			color: color('slate.500'),
 			letterSpacing: 0,
 			fontWeight: 'regular'
