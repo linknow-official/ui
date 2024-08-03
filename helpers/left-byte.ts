@@ -4,7 +4,7 @@ export type CampaignStatus = 'Active' | 'Paused' | 'Finished' | 'Requested';
 export type TrackerPlatform = 'Adjust' | 'Appsflyer';
 export type CountryCode = 'TR' | 'USA' | 'FR'
 export type ConversionType = 'Conversion' | 'Install' | 'Event' | 'Reattribution' | 'Rejected' | 'Session';
-export type Platform = 'app-store' | 'play-store';
+export type Platform = 'iOS' | 'android';
 export type PricingType = 'Fixed' | 'LocationBased' | 'PlatformBased' | 'LocationAndPlatformBased';
 export type PlaformName = 'iOS' | 'Android'
 
@@ -82,17 +82,17 @@ export type CampaignPricing = {
 
 
 export const getPlatformIcon = (platform: string | Platform) => {
-	if (platform.toString() == '0') return 'app-store'
-	if (platform.toString() == '1') return 'play-store'
-	if (platform.toString() == 'iOS') return 'app-store'
-	if (platform.toString() == 'Android') return 'play-store'
+	if (platform.toString() == '0') return 'iOS'
+	if (platform.toString() == '1') return 'android'
+	if (platform.toString() == 'iOS') return 'iOS'
+	if (platform.toString() == 'Android') return 'android'
 
 	return platform as Icon
 }
 
 export const getPlatformName = (platform: string | Platform) => {
-	if (platform.toString() == 'app-store') return 'iOS'
-	if (platform.toString() == 'play-store') return 'Android'
+	if (platform.toString() == 'iOS') return 'iOS'
+	if (platform.toString() == 'android') return 'Android'
 
 	return platform as PlaformName
 }

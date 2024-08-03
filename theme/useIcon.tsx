@@ -29,7 +29,7 @@ import MailMinus from 'unicpeak-ui/assets/icons/mail-minus.svg'
 import Mail from 'unicpeak-ui/assets/icons/mail.svg'
 import Mails from 'unicpeak-ui/assets/icons/mails.svg'
 import PersonStanding from 'unicpeak-ui/assets/icons/person-standing.svg'
-import PlayStore from 'unicpeak-ui/assets/icons/play-store.svg'
+import PlayStore from 'unicpeak-ui/assets/icons/android.svg'
 import PlusCircle from 'unicpeak-ui/assets/icons/plus-circle.svg'
 import PlusSquare from 'unicpeak-ui/assets/icons/plus-square.svg'
 import Plus from 'unicpeak-ui/assets/icons/plus.svg'
@@ -89,8 +89,8 @@ export type Icon =
 'timer' |
 'glass-water' |
 'unknown-store' |
-'app-store' |
-'play-store' |
+'iOS' |
+'android' |
 'chevrons-down-up' |
 'corner-up-left-white' |
 'corner-up-left' |
@@ -161,8 +161,8 @@ const iconPaths: Record<Icon, IconProps> = {
 	'timer': Timer,
 	'unknown-store': UnknownStore,
 	'glass-water': GlassWater,
-	'app-store': AppStore,
-	'play-store': PlayStore,
+	'iOS': AppStore,
+	'android': PlayStore,
 	'chevrons-down-up': ChevronsDownUp,
 	'corner-up-left-white': CornerUpLeftWhite,
 	'corner-up-left': CornerUpLeft,

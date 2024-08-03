@@ -79,7 +79,7 @@ const replaceBreakpoints = <T>(
 		}
 
 		return mergeStyles(baseStyle, breakpointStyle) as StyleProp<T>
-	}
+	} 
 	return style
 }
 
