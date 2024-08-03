@@ -27,6 +27,7 @@ export function LBText (props: LBTextProps) {
 			fontSize: typograpgyTheme.fontSize,
 			letterSpacing: typograpgyTheme.letterSpacing,
 			...({ lineSpacing: typograpgyTheme.lineSpacing as number }),
+			...({ lineHeight: typograpgyTheme.lineHeight as number }),
 			fontFamily: fontWeight || typograpgyTheme.fontWeight,
 			borderBottomWidth: underlineWidth ? spacing(underlineWidth) : spacing(0)
 		}
