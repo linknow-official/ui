@@ -34,7 +34,8 @@ export function LBInput (props: LBInputProps) {
 			renderItemKey={(index) => `input_${label}_${index}`}
 			renderItemStyle={{
 				style: {
-					paddingVertical: spacing(0.2)
+					paddingVertical: spacing(0.2),
+					overflow: 'hidden'
 				}
 			}}
 		>
