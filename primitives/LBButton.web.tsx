@@ -2,7 +2,7 @@ import { useLBTheme } from 'unicpeak-ui/hooks/useLBTheme'
 import { ButtonTheme, ButtonVariant, useButton } from 'unicpeak-ui/theme/useButton'
 import { useIcon } from 'unicpeak-ui/theme/useIcon'
 import React from 'react'
-import { Pressable, TouchableOpacity, ViewStyle } from 'react-native'
+import { Pressable, TouchableOpacityProps, ViewStyle } from 'react-native'
 import { LBIcon } from './LBIcon'
 import { LBLoading } from './LBLoading'
 import { LBText } from './LBText'
@@ -10,7 +10,7 @@ import { LBView } from './LBView'
 import { ThemeProps } from './ThemeProps'
 import { ExtendedStyleProp, useMediaQuery } from 'unicpeak-ui/hooks/useMediaQuery'
 
-export type BaseLBButtonProps = ThemeProps & TouchableOpacity['props'] & {
+export type BaseLBButtonProps = ThemeProps & TouchableOpacityProps & {
     variant?: ButtonVariant,
     loading?: boolean,
     override?: Partial<ButtonTheme>
@@ -23,7 +23,7 @@ export type LBIconButtonProps = BaseLBButtonProps & {
 };
 
 export type LBButtonProps = BaseLBButtonProps & {
-  variant: Exclude<ButtonVariant, 'just-icon' | 'just-icon-circle'>
+	variant: Exclude<ButtonVariant, 'just-icon' | 'just-icon-circle'>
     fullWidth?: boolean;
     icon?: Parameters<typeof useIcon>[0]
 }
