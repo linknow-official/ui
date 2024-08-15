@@ -61,7 +61,7 @@ export function LBIntroductionRow ({
                 		borderRadius: spacing(1.6),
                 		backgroundColor: color('background')
                 	}}>
-                		<LBIcon icon='person-standing' size='medium' fill={color('white')} />
+                		<LBIcon icon='puzzle' size='medium' fill={color('white')} />
                 	</LBView>
                 </LBView>
 				}
