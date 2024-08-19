@@ -6,7 +6,7 @@ import { Icon } from 'unicpeak-ui/theme/useIcon'
 import { Dimensions } from 'react-native'
 
 type LBModalProps = {
-    title: string;
+    title?: string;
     subTitle?: string;
     icon?: Icon;
     children: React.ReactNode;
@@ -33,12 +33,17 @@ export function LBModal ({ title, subTitle, icon, actions, children }: Readonly<
 				marginBottom: spacing(2),
 				justifyContent: 'space-between'
 			}}>
-				<LBView center>
-					<LBText variant='large' fontWeight='bold'>{title} </LBText>
-				</LBView>
-				<LBView style={{ flex: 1 }} center>
-					<LBText variant='subtle' fontWeight='bold' style={{ fontSize: spacing(3) }}>{subTitle} </LBText>
-				</LBView>
+				{
+					!!title && <LBView center>
+						<LBText variant='large' fontWeight='bold'>{title} </LBText>
+					</LBView>
+				}
+				{
+					!!subTitle &&
+					<LBView style={{ flex: 1 }} center>
+						<LBText variant='subtle' fontWeight='bold' style={{ fontSize: spacing(3) }}>{subTitle} </LBText>
+					</LBView>
+				}
 				{icon && <LBIcon icon={icon} fill={color('white')} />}
 				{actions}
 			</LBView >

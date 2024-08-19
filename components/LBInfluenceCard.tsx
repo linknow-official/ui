@@ -7,12 +7,13 @@ import { useState } from 'react'
 import * as Clipboard from 'expo-clipboard'
 
 type LBInfluenceCardProps = {
+	title?: string;
     link: string;
     date: Date;
     onPress?: () => void;
 }
 
-export function LBInfluenceCard ({ link, date, onPress }: LBInfluenceCardProps) {
+export function LBInfluenceCard ({ title, link, date, onPress }: LBInfluenceCardProps) {
 	const { color, spacing } = useLBTheme()
 	const [ copied, setCopied ] = useState(false)
 
@@ -41,14 +42,14 @@ export function LBInfluenceCard ({ link, date, onPress }: LBInfluenceCardProps) 
 				flex: 5,
 				marginBottom: spacing(2)
 			}}>
-				<LBText
+				{!!title && <LBText
 					variant="detail"
 					color={color('slate.900')}
 					style={{
 					}}
 				>
                     Share with your followers
-				</LBText>
+				</LBText>}
 				<LBText
 					variant="table-head"
 					color={color('slate.900')}
